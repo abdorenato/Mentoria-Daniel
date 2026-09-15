@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HQ — Mentoria Rota Cirúrgica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0E2A45;--navy2:#16395C;--teal:#17A08A;--teal-d:#0E7A68;--orange:#F0973B;--red:#D95555;
+        --paper:#F7F9FB;--card:#FFFFFF;--ink:#152A3D;--sub:#4A5D6E;--line:#DCE4EB;--pale:#B8C6D4;--soft:#F3F7FA}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5}
+  h1,h2,h3,h4,.brand,.tab,button,.chip,.k{font-family:"Space Grotesk",system-ui,sans-serif}
+  .k{font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal)}
+
+  .shell{display:flex;min-height:100vh}
+  .rail{width:232px;background:var(--navy);color:#fff;padding:22px 16px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px;flex-shrink:0}
+  .brand{font-weight:700;font-size:17px;line-height:1.25}
+  .brand small{display:block;font-weight:500;color:var(--teal);font-size:11.5px;letter-spacing:.4px;margin-top:4px}
+  .who{margin:14px 0 10px;background:var(--navy2);border-radius:10px;padding:10px}
+  .who p{font-size:11px;color:var(--pale);margin-bottom:6px}
+  .who .seg{display:flex;background:#0B2238;border-radius:8px;padding:3px;gap:3px}
+  .who .seg button{flex:1;border:0;background:transparent;color:var(--pale);font-size:12.5px;font-weight:600;padding:6px 0;border-radius:6px;cursor:pointer}
+  .who .seg button.on{background:var(--teal);color:#fff}
+  .tab{display:flex;align-items:center;gap:9px;border:0;background:transparent;color:var(--pale);font-size:13.5px;font-weight:600;text-align:left;padding:9px 12px;border-radius:9px;cursor:pointer;width:100%}
+  .tab:hover{background:rgba(255,255,255,.06);color:#fff}
+  .tab.on{background:var(--navy2);color:#fff}
+  .tab .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);flex-shrink:0}
+  .tab.t-enc .dot{background:#F0973B}
+  .tab.t-oferta .dot{background:#E9C46A}
+  .tab.t-dec .dot{background:#7FA8D9}
+  .tab.t-assets .dot{background:var(--pale)}
+  .save{margin-top:auto;font-size:11.5px;color:var(--pale);padding:8px 4px}
+  .save b{color:var(--teal)} .save.err b{color:var(--orange)}
+
+  main{flex:1;padding:34px 40px 80px;max-width:1100px}
+  .crumb{font-size:12px;font-weight:600;letter-spacing:.6px;color:var(--teal);text-transform:uppercase;margin-bottom:6px;font-family:"Space Grotesk"}
+  h1{font-size:27px;font-weight:700;color:var(--navy);margin-bottom:6px}
+  .lead{color:var(--sub);max-width:680px;margin-bottom:26px}
+  section{display:none} section.on{display:block}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px}
+  .panel h3{font-size:16px;color:var(--navy);margin-bottom:8px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:.3px;padding:4px 11px;border-radius:99px;cursor:pointer;border:0;color:#fff}
+  .chip.rascunho{background:var(--pale);color:var(--navy)}
+  .chip.revisao{background:var(--orange)}
+  .chip.aprovado{background:var(--teal)}
+  .chip.pendente{background:var(--orange)}
+  .chip.decidido{background:var(--teal)}
+  .chip.mini{font-size:10px;padding:3px 9px;cursor:default}
+  input[type=text],textarea,select{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font:inherit;color:var(--ink);background:#FDFEFF}
+  input[type=text]:focus,textarea:focus{outline:2px solid var(--teal);border-color:var(--teal)}
+  textarea{resize:vertical;min-height:56px}
+  label{font-size:11.5px;font-weight:700;color:var(--sub);letter-spacing:.4px;text-transform:uppercase;display:block;margin-bottom:5px;font-family:"Space Grotesk"}
+  .btn{border:0;border-radius:9px;padding:9px 16px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:"Space Grotesk"}
+  .btn.primary{background:var(--teal);color:#fff}
+  .btn.primary:hover{background:var(--teal-d)}
+  .btn.dark{background:var(--navy);color:#fff}
+  .btn.ghost{background:transparent;color:var(--sub);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--sub)}
+  .btn.tiny{padding:5px 10px;font-size:12px}
+  .muted{color:var(--sub);font-size:13px}
+
+  .promessa{background:var(--navy);color:#fff;border-radius:14px;padding:26px 28px;margin-bottom:16px}
+  .promessa .crumb{color:var(--teal)}
+  .promessa p.q{font-size:19px;font-weight:600;font-family:"Space Grotesk";line-height:1.45}
+  .mech{border-left:4px solid var(--teal);padding-left:14px}
+  .mech h4{font-size:14px;color:var(--teal-d);margin-bottom:4px}
+  .vilao{border-left-color:var(--red)} .vilao h4{color:var(--red)}
+  .frase{background:#F0F5F3;border-radius:10px;padding:14px 16px;font-style:italic;color:var(--navy);margin-top:12px}
+
+  .progress{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+  .bar{flex:1;height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--teal);border-radius:99px;transition:width .3s}
+  .progress b{color:var(--navy);white-space:nowrap;font-family:"Space Grotesk"}
+  .mod{background:var(--card);border:1px solid var(--line);border-radius:13px;margin-bottom:12px;overflow:hidden}
+  .mod.aprovado-b{border-color:var(--teal)}
+  .mod-head{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;flex-wrap:wrap}
+  .mod-head .num{font-family:"Space Grotesk";font-weight:700;font-size:13px;color:#fff;background:var(--navy);border-radius:8px;min-width:34px;height:34px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .mod-head .num.bonus{background:var(--pale);color:var(--navy)}
+  .mod-head .t{flex:1;font-weight:600;color:var(--navy);min-width:180px}
+  .mod-head .t small{display:block;font-weight:500;color:var(--sub);font-size:12px}
+  .enc-pill{font-size:10.5px;font-weight:700;color:var(--teal-d);background:#E4F3EF;border-radius:99px;padding:4px 10px;white-space:nowrap;font-family:"Space Grotesk";cursor:pointer;border:0}
+  .enc-pill:hover{background:#D2EBE3}
+  .mod-body{border-top:1px solid var(--line);padding:16px;display:none;background:#FBFCFE}
+  .mod.open .mod-body{display:block}
+  .mod-body .row{display:grid;grid-template-columns:1fr 180px;gap:12px;margin-bottom:12px}
+  .mod-tools{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .arrow{transition:transform .2s;color:var(--pale);flex-shrink:0}
+  .mod.open .arrow{transform:rotate(90deg)}
+
+  .enc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:12px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .enc .date{background:var(--navy);color:#fff;border-radius:11px;min-width:78px;padding:10px 8px;text-align:center;flex-shrink:0}
+  .enc .date b{display:block;font-family:"Space Grotesk";font-size:19px}
+  .enc .date span{font-size:10.5px;color:var(--pale);letter-spacing:.5px}
+  .enc.pres .date{background:var(--orange)}
+  .enc .info{flex:1;min-width:220px}
+  .enc .info h3{font-size:16px;color:var(--navy)}
+  .enc .info p{font-size:13px;color:var(--sub);margin-top:2px}
+  .enc .acts{display:flex;gap:8px;flex-wrap:wrap}
+
+  .escada{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+  .degrau{border-radius:13px;padding:18px;color:#fff}
+  .degrau:nth-child(1){background:var(--navy)}
+  .degrau:nth-child(2){background:var(--teal)}
+  .degrau:nth-child(3){background:var(--orange)}
+  .degrau label{color:rgba(255,255,255,.85)}
+  .degrau input{background:rgba(255,255,255,.14);border-color:transparent;color:#fff;font-family:"Space Grotesk";font-weight:700;font-size:21px}
+  .degrau p{font-size:12.5px;color:rgba(255,255,255,.85);margin-top:8px}
+  .ups{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .up{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px}
+  .up h4{font-size:14px;color:var(--navy);margin-bottom:8px}
+
+  .dec{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 18px;margin-bottom:12px}
+  .dec-head{display:flex;align-items:flex-start;gap:12px}
+  .dec-head .t{flex:1}
+  .dec-head .t b{color:var(--navy);font-family:"Space Grotesk";font-size:15px}
+  .dec-head .t p{font-size:13px;color:var(--sub);margin-top:3px}
+  .comments{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px}
+  .cmt{display:flex;gap:10px;margin-bottom:10px}
+  .avatar{width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-family:"Space Grotesk";font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .avatar.d{background:var(--teal)}
+  .cmt .bubble{background:#F1F5F8;border-radius:10px;padding:8px 12px;font-size:13.5px;flex:1;white-space:pre-wrap}
+  .cmt .bubble small{display:block;color:var(--sub);font-size:11px;margin-top:3px}
+  .cmt-new{display:flex;gap:8px;margin-top:8px}
+  .cmt-new input{flex:1}
+
+  .asset{background:var(--card);border:1px solid var(--line);border-radius:13px;margin-bottom:10px;overflow:hidden}
+  .asset.done{border-color:var(--teal)}
+  .asset-head{display:flex;align-items:center;gap:12px;padding:13px 16px}
+  .asset-head input[type=checkbox]{width:19px;height:19px;accent-color:var(--teal);cursor:pointer;flex-shrink:0}
+  .asset-head .t{flex:1;font-weight:600;color:var(--navy);cursor:pointer}
+  .asset-head .t small{display:block;font-weight:500;color:var(--sub);font-size:12px}
+  .asset.done .asset-head .t{color:var(--teal-d)}
+  .asset-head select{width:110px}
+  .asset-body{border-top:1px solid var(--line);background:#FBFCFE;padding:18px 20px;display:none}
+  .asset.open .asset-body{display:block}
+  .asset-body .doc{max-width:720px}
+  .doc h4{color:var(--navy);font-size:15px;margin:16px 0 6px}
+  .doc h4:first-child{margin-top:0}
+  .doc p{margin-bottom:9px}
+  .doc ul{margin:0 0 10px 20px}
+  .doc li{margin-bottom:4px}
+  .doc .say{background:#EEF6F3;border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:9px 13px;margin-bottom:9px;font-style:italic;color:var(--navy)}
+  .asset-tools{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .asset-body textarea.raw{min-height:340px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55}
+
+  .shortcut{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+  .sc{background:var(--navy);color:#fff;border-radius:14px;padding:18px;cursor:pointer;border:0;text-align:left}
+  .sc:hover{background:var(--navy2)}
+  .sc .k{color:var(--teal)}
+  .sc h3{font-size:15.5px;margin-top:6px;color:#fff}
+  .sc p{font-size:12.5px;color:var(--pale);margin-top:4px}
+
+  #gate{display:none;position:fixed;inset:0;background:rgba(8,26,44,.92);z-index:80;align-items:center;justify-content:center;padding:20px}
+  #gate.on{display:flex}
+  .gate-card{background:#fff;border-radius:16px;padding:26px;width:min(400px,100%)}
+
+  /* SLIDE VIEWER */
+  #viewer{display:none;position:fixed;inset:0;background:#081A2C;z-index:50;flex-direction:column}
+  #viewer.on{display:flex}
+  .v-top{display:flex;align-items:center;gap:12px;padding:14px 20px;color:var(--pale)}
+  .v-top .vt{flex:1;font-family:"Space Grotesk";font-weight:600;font-size:14px;color:#fff}
+  .v-top button{background:var(--navy2);color:#fff;border:0;border-radius:8px;padding:8px 14px;font-family:"Space Grotesk";font-weight:600;font-size:12.5px;cursor:pointer}
+  .v-top button:hover{background:#1E4C74}
+  .v-stage{flex:1;display:flex;align-items:center;justify-content:center;padding:10px 66px;min-height:0;position:relative}
+  .slide{width:min(100%,1060px);aspect-ratio:16/9;background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.5);overflow:hidden;position:relative;display:flex;flex-direction:column}
+  .slide.dark{background:var(--navy);color:#fff}
+  .sl-pad{padding:5.5% 6% 5.5%;display:flex;flex-direction:column;height:100%}
+  .sl-k{font-family:"Space Grotesk";font-size:clamp(10px,1.2vw,13px);font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:1.2%}
+  .sl-t{font-family:"Space Grotesk";font-size:clamp(19px,2.9vw,33px);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:3%}
+  .slide.dark .sl-t{color:#fff}
+  .sl-quote{background:var(--soft);border-left:4px solid var(--teal);border-radius:0 10px 10px 0;padding:1.8% 2.5%;font-family:"Source Serif 4",Georgia,serif;font-style:italic;font-size:clamp(12px,1.55vw,16.5px);color:var(--navy);margin-bottom:2.6%}
+  .slide.dark .sl-quote{background:var(--navy2);color:#fff}
+  .sl-b{list-style:none;display:flex;flex-direction:column;gap:2%;flex:1}
+  .sl-b li{display:flex;gap:12px;font-size:clamp(12px,1.65vw,17.5px);color:var(--sub);line-height:1.42}
+  .slide.dark .sl-b li{color:#DCE6EF}
+  .sl-b li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:.5em}
+  .sl-agenda{display:flex;flex-direction:column;gap:2%;flex:1}
+  .sl-agenda .ag{display:flex;gap:16px;background:var(--soft);border-radius:10px;padding:1.6% 2.4%;align-items:center}
+  .sl-agenda .ag b{font-family:"Space Grotesk";color:var(--teal-d);font-size:clamp(12px,1.55vw,16.5px);min-width:66px}
+  .sl-agenda .ag span{font-size:clamp(12px,1.55vw,16.5px);color:var(--navy)}
+  .sl-cover-sub{font-family:"Space Grotesk";font-size:clamp(12px,1.7vw,18px);color:var(--pale);margin-top:2%}
+  .sl-cover-t{font-family:"Space Grotesk";font-size:clamp(25px,4.2vw,48px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:3%}
+  .sl-cover-box{background:var(--navy2);border-radius:12px;padding:2.4% 3%;font-size:clamp(12px,1.65vw,17px);color:#DCE6EF;line-height:1.5;margin-top:auto}
+  .sl-next{background:var(--teal);border-radius:12px;padding:2% 3%;margin-top:auto;font-size:clamp(12px,1.6vw,16.5px)}
+  .sl-next b{color:var(--navy)} .sl-next span{color:#fff;font-weight:600}
+  .sl-foot{position:absolute;bottom:2.4%;left:6%;font-size:clamp(8px,1vw,11px);color:var(--pale)}
+
+  /* ---- tipos visuais v2 do viewer ---- */
+  .sv-chips{display:flex;gap:1.6%;margin-top:auto}
+  .sv-chip{flex:1;background:var(--navy2);border-radius:10px;padding:1.6% 1%;text-align:center}
+  .sv-chip b{display:block;font-family:"Space Grotesk";font-size:clamp(15px,2.4vw,26px);color:var(--teal)}
+  .sv-chip span{font-size:clamp(9px,1.1vw,12px);color:var(--pale)}
+  .sv-cover-foot{margin-top:2.2%;font-size:clamp(9px,1.05vw,11.5px);color:var(--gray,#8A97A5);color:#8A97A5}
+  .sv-stairs{position:relative;flex:1}
+  .sv-step{position:absolute;width:31%;border-radius:12px;padding:1.6% 1.8%}
+  .sv-step b{display:block;font-family:"Space Grotesk";font-size:clamp(11px,1.5vw,15.5px);margin-bottom:.4em}
+  .sv-step span{font-size:clamp(10px,1.25vw,13px)}
+  .sv-arr{position:absolute;font-size:clamp(16px,2.4vw,26px);color:#C94F4F;font-weight:700}
+  .sv-note{background:var(--soft);border-radius:10px;padding:1.6% 2.2%;font-size:clamp(11px,1.45vw,15px);color:var(--sub);margin-top:1.8%}
+  .sv-note b{color:var(--navy)}
+  .slide.dark .sv-note{background:var(--navy2);color:var(--pale)}
+  .slide.dark .sv-note b{color:#fff}
+  .sv-bigq{font-family:"Source Serif 4",Georgia,serif;font-style:italic;font-size:clamp(17px,2.6vw,28px);color:#fff;line-height:1.42;margin:1% 0 2.5%}
+  .sv-qmark{font-family:Georgia,serif;font-size:clamp(50px,8vw,90px);font-weight:700;color:var(--teal);line-height:.7;margin-bottom:1%}
+  .sv-qa{font-family:"Space Grotesk";font-weight:700;color:var(--teal);font-size:clamp(11px,1.4vw,15px);margin-bottom:2.5%}
+  .sv-duo{display:flex;gap:2%;flex:1;min-height:0}
+  .sv-card{flex:1;border-radius:14px;padding:2.2% 2.4%;display:flex;flex-direction:column}
+  .sv-card.c1{background:var(--navy)} .sv-card.c2{background:var(--teal)}
+  .sv-ch{display:flex;align-items:center;gap:10px;margin-bottom:2.5%}
+  .sv-ico{width:clamp(28px,3.6vw,40px);height:clamp(28px,3.6vw,40px);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .sv-card.c1 .sv-ico{background:var(--teal)} .sv-card.c2 .sv-ico{background:#fff}
+  .sv-ico svg{width:58%;height:58%}
+  .sv-ch b{font-family:"Space Grotesk";letter-spacing:1.5px;font-size:clamp(11px,1.5vw,16px)}
+  .sv-card.c1 .sv-ch b{color:var(--teal)} .sv-card.c2 .sv-ch b{color:var(--navy)}
+  .sv-ch span{display:block;font-size:clamp(10px,1.2vw,12.5px);color:#fff;font-weight:600}
+  .sv-items{list-style:none;display:flex;flex-direction:column;gap:1.8%;flex:1}
+  .sv-items li{display:flex;gap:9px;font-size:clamp(10px,1.3vw,13.5px);color:#E4EDF4;line-height:1.35;align-items:flex-start}
+  .sv-items li svg{width:clamp(13px,1.6vw,17px);height:clamp(13px,1.6vw,17px);flex-shrink:0;margin-top:.15em}
+  .sv-tl{position:relative;margin:2.5% 0 1%;height:34%}
+  .sv-tl-line{position:absolute;left:2%;right:2%;top:44%;height:2px;background:#C9D4DE}
+  .sv-node{position:absolute;width:16%;text-align:center}
+  .sv-node .dt{border-radius:8px;color:#fff;font-family:"Space Grotesk";font-weight:700;font-size:clamp(9px,1.2vw,13px);padding:5% 0;margin:0 8%}
+  .sv-node .dot{width:clamp(9px,1.2vw,13px);height:clamp(9px,1.2vw,13px);border-radius:50%;margin:6% auto}
+  .sv-node .tt{font-family:"Space Grotesk";font-weight:700;font-size:clamp(8.5px,1.05vw,11.5px);color:var(--navy)}
+  .sv-node .st{font-size:clamp(7.5px,0.92vw,10px);color:var(--sub);line-height:1.25}
+  .sv-feats{display:flex;gap:2%;margin-top:1%}
+  .sv-feat{flex:1;background:var(--soft);border-radius:11px;padding:1.6% 1.8%;display:flex;gap:10px;align-items:flex-start}
+  .sv-feat .sv-ico{background:#fff}
+  .sv-feat b{display:block;font-family:"Space Grotesk";font-size:clamp(10px,1.25vw,13.5px);color:var(--navy)}
+  .sv-feat span{font-size:clamp(8.5px,1.05vw,11px);color:var(--sub);line-height:1.3}
+  .sv-panels{display:flex;gap:2%;flex:1;min-height:0}
+  .sv-panel{flex:1;border-radius:14px;padding:2% 2.2%}
+  .sv-panel.p1{background:var(--navy)} .sv-panel.p2{background:var(--soft)}
+  .sv-panel .lb{font-family:"Space Grotesk";font-weight:700;letter-spacing:1px;font-size:clamp(9px,1.15vw,12px);margin-bottom:3%}
+  .sv-panel.p1 .lb{color:var(--teal)} .sv-panel.p2 .lb{color:var(--orange)}
+  .sv-pi{display:flex;gap:10px;align-items:center;margin-bottom:2.6%}
+  .sv-pi i{font-style:normal;font-family:"Space Grotesk";font-weight:700;width:clamp(20px,2.6vw,30px);height:clamp(20px,2.6vw,30px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(10px,1.25vw,14px);flex-shrink:0}
+  .sv-panel.p1 .sv-pi i{background:var(--navy2);color:var(--teal)}
+  .sv-panel.p2 .sv-pi i{background:#fff;color:var(--orange)}
+  .sv-pi span{font-size:clamp(10px,1.3vw,13.5px);line-height:1.3}
+  .sv-panel.p1 .sv-pi span{color:#fff} .sv-panel.p2 .sv-pi span{color:var(--navy)}
+  .sv-bonus{background:#E4F3EF;border-radius:10px;padding:1.4% 2.2%;font-size:clamp(10px,1.25vw,13px);color:var(--navy);margin-top:1.8%}
+  .sv-bonus b{color:var(--teal-d)}
+  .sv-mentors{display:flex;gap:2%;flex:1;min-height:0}
+  .sv-mt{flex:1;background:var(--soft);border-radius:14px;padding:2.2%}
+  .sv-mt .hd{display:flex;gap:12px;align-items:center;margin-bottom:3%}
+  .sv-av{width:clamp(38px,5vw,58px);height:clamp(38px,5vw,58px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Space Grotesk";font-weight:700;color:#fff;font-size:clamp(13px,1.8vw,21px);flex-shrink:0}
+  .sv-mt .hd b{font-family:"Space Grotesk";font-size:clamp(12px,1.6vw,17px);color:var(--navy);display:block}
+  .sv-mt .hd em{font-style:normal;font-family:"Space Grotesk";font-weight:700;font-size:clamp(8.5px,1.05vw,11px);color:var(--teal-d)}
+  .sv-cred{background:#fff;border-radius:9px;padding:2% 2.4%;font-size:clamp(9px,1.15vw,12px);color:var(--sub);margin-bottom:2.2%;display:flex;gap:8px;align-items:center}
+  .sv-cred svg{width:clamp(12px,1.5vw,16px);height:clamp(12px,1.5vw,16px);flex-shrink:0}
+  .sv-stats{display:flex;gap:2%;margin-bottom:2.4%}
+  .sv-stat{flex:1;background:var(--navy2);border-radius:12px;padding:2.2% 1%;text-align:center}
+  .sv-stat b{display:block;font-family:"Space Grotesk";font-size:clamp(19px,3.2vw,36px);color:var(--teal)}
+  .sv-stat span{font-size:clamp(9px,1.1vw,12px);color:var(--pale)}
+  .sv-guar{background:var(--teal);border-radius:12px;padding:1.8% 2.4%;display:flex;gap:12px;align-items:center;font-size:clamp(11px,1.4vw,15px);color:#fff}
+  .sv-guar svg{width:clamp(20px,2.6vw,30px);height:clamp(20px,2.6vw,30px);flex-shrink:0}
+  .sv-guar b{color:var(--navy)}
+  .sv-line{font-size:clamp(10px,1.25vw,13px);color:var(--pale);margin-top:1.6%}
+  .sv-line b{color:var(--teal)}
+
+  .v-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.09);color:#fff;border:0;width:46px;height:46px;border-radius:50%;font-size:20px;cursor:pointer;z-index:2}
+  .v-nav:hover{background:rgba(255,255,255,.2)}
+  .v-nav.prev{left:12px} .v-nav.next{right:12px}
+  .v-count{text-align:center;color:var(--pale);font-family:"Space Grotesk";font-size:12.5px;padding:0 0 14px}
+  #sl-editor{display:none;position:fixed;inset:0;background:rgba(8,26,44,.85);z-index:60;align-items:center;justify-content:center;padding:20px}
+  #sl-editor.on{display:flex}
+  .ed-card{background:#fff;border-radius:16px;padding:22px;width:min(640px,100%);max-height:90vh;overflow:auto}
+  .ed-card h3{color:var(--navy);margin-bottom:14px}
+  .ed-card .fld{margin-bottom:12px}
+  .ed-card textarea{min-height:140px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+  .ed-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:6px}
+
+  /* PAGE OVERLAY */
+  #pageov{display:none;position:fixed;inset:0;background:#081A2C;z-index:50;flex-direction:column}
+  #pageov.on{display:flex}
+  .po-top{display:flex;align-items:center;gap:12px;padding:12px 20px;color:#fff}
+  .po-top .vt{flex:1;font-family:"Space Grotesk";font-weight:600;font-size:14px}
+  .po-top button{background:var(--navy2);color:#fff;border:0;border-radius:8px;padding:8px 14px;font-family:"Space Grotesk";font-weight:600;font-size:12.5px;cursor:pointer}
+  .po-body{flex:1;overflow:auto;background:#fff}
+
+  /* landing embutida */
+  .lp{font-size:16.5px;line-height:1.6}
+  .lp .wrap{max-width:760px;margin:0 auto;padding:0 22px}
+  .lp header{background:var(--navy);color:#fff;padding:60px 0 52px}
+  .lp .lk{font-family:"Space Grotesk";font-size:12.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:12px}
+  .lp h1{font-size:clamp(30px,5.5vw,44px);line-height:1.12;margin-bottom:16px;color:#fff}
+  .lp header p.sub{color:#C9D6E2;font-size:clamp(16px,2.4vw,19px);max-width:600px;margin-bottom:26px}
+  .lp .lbtn{display:inline-block;background:var(--teal);color:#fff;font-family:"Space Grotesk";font-weight:700;font-size:16px;padding:15px 30px;border-radius:12px;text-decoration:none;border:0;cursor:pointer;text-align:center}
+  .lp .heroband{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+  .lp .heroband span{background:var(--navy2);color:#C9D6E2;font-size:13px;font-weight:600;border-radius:99px;padding:7px 14px}
+  .lp section{display:block;padding:48px 0}
+  .lp section.alt{background:var(--soft)}
+  .lp h2{font-size:clamp(23px,3.6vw,29px);color:var(--navy);line-height:1.2;margin:8px 0 14px}
+  .lp .qq{font-family:"Source Serif 4",Georgia,serif;font-style:italic;font-size:17px;color:var(--navy);background:#fff;border-left:4px solid var(--red);border-radius:0 12px 12px 0;padding:14px 18px;margin-bottom:10px}
+  .lp .qq small{display:block;font-family:system-ui;font-style:normal;font-size:12px;color:var(--sub);margin-top:6px}
+  .lp .bigline{font-size:clamp(17px,2.6vw,20px)}
+  .lp .mech2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+  .lp .mcard{border-radius:16px;padding:22px;color:#fff}
+  .lp .m1{background:var(--navy)} .lp .m2{background:var(--teal)}
+  .lp .mcard h3{font-size:20px;margin:6px 0 8px;color:#fff}
+  .lp .mcard p{font-size:15px;color:rgba(255,255,255,.92)}
+  .lp .gradegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+  .lp .gitem{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 15px;font-size:14.5px;font-weight:600;color:var(--navy);display:flex;gap:10px}
+  .lp .gitem i{font-style:normal;font-family:"Space Grotesk";font-weight:700;color:#fff;background:var(--navy);border-radius:7px;min-width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+  .lp .gitem.b2 i{background:var(--orange)}
+  .lp .howlist{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:18px}
+  .lp .hl{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px}
+  .lp .hl b{display:block;font-family:"Space Grotesk";color:var(--navy);font-size:14.5px;margin-bottom:4px}
+  .lp .hl span{font-size:13.5px;color:var(--sub)}
+  .lp .guarantee{margin-top:16px;background:#EFF7F4;border:1px solid #CBE7DE;border-radius:14px;padding:16px 18px;font-size:15px}
+  .lp .guarantee b{color:var(--teal-d)}
+  .lp #lp-aplicar{background:var(--navy);color:#fff}
+  .lp #lp-aplicar h2{color:#fff}
+  .lp .form{background:var(--navy2);border-radius:18px;padding:24px;margin-top:20px;display:grid;gap:14px}
+  .lp .fld label{color:var(--pale)}
+  .lp .fld input,.lp .fld select,.lp .fld textarea{border:1px solid #2A4A6B;background:#0C2038;color:#fff}
+  .lp .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .lp .finep{font-size:12.5px;color:var(--pale);text-align:center}
+  .lp footer{background:#0A2136;color:#7E93A8;font-size:12.5px;padding:24px 0;line-height:1.7}
+  .lp #lp-obrigado{display:none;background:var(--navy2);border-radius:18px;padding:32px 26px;margin-top:20px;text-align:center}
+  .lp #lp-obrigado h3{color:#fff;font-size:22px;margin-bottom:8px}
+  .lp #lp-obrigado p{color:var(--pale);font-size:15px}
+
+  /* página dos pais embutida */
+  .pais-wrap{max-width:700px;margin:26px auto 60px;background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 8px 30px rgba(14,42,69,.12);overflow:hidden}
+  .pais-h{background:var(--navy);color:#fff;padding:24px 30px}
+  .pais-h .lk{font-family:"Space Grotesk";font-size:11px;font-weight:700;letter-spacing:1.4px;color:var(--teal)}
+  .pais-h h2{font-family:"Space Grotesk";font-size:21px;margin:4px 0 6px;color:#fff}
+  .pais-h p{font-size:12.5px;color:#B8C6D4}
+  .pais-b{padding:26px 30px;font-size:14px;line-height:1.65;color:var(--sub)}
+  .pais-b h4{font-family:"Space Grotesk";color:var(--teal-d);font-size:13px;letter-spacing:.5px;margin:16px 0 4px}
+  .pais-b .box{background:var(--soft);border-radius:10px;padding:14px 16px;margin-top:14px}
+  .pais-b .box.g{background:#EFF7F4}
+  .pais-b .box h4{margin-top:0;color:var(--navy)}
+  .pais-b .cta{font-weight:700;color:var(--navy);margin-top:16px}
+  .pais-f{padding:14px 30px;border-top:1px solid var(--line);font-size:11px;color:var(--pale)}
+
+  @media (max-width:840px){
+    .shell{flex-direction:column}
+    .rail{width:100%;height:auto;position:static}
+    .rail nav{display:flex;overflow-x:auto;gap:6px;padding-bottom:4px}
+    .tab{white-space:nowrap;width:auto}
+    main{padding:22px 16px 60px}
+    .grid2,.escada,.ups,.shortcut{grid-template-columns:1fr}
+    .mod-body .row{grid-template-columns:1fr}
+    .v-stage{padding:8px 8px}
+    .v-nav.prev{left:4px}.v-nav.next{right:4px}
+    .lp .mech2,.lp .row2,.lp .howlist,.lp .gradegrid{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <div class="brand">HQ · Rota Cirúrgica<small>Mentoria Dr. Daniel Kirchhoff · turma fundadora</small></div>
+    <div class="who">
+      <p>Quem está editando agora</p>
+      <div class="seg">
+        <button id="who-r" class="on" onclick="setWho('Renato')">Renato</button>
+        <button id="who-d" onclick="setWho('Daniel')">Daniel</button>
+      </div>
+    </div>
+    <nav>
+      <button class="tab on" data-s="visao" onclick="go('visao')"><span class="dot"></span>Visão geral</button>
+      <button class="tab" data-s="grade" onclick="go('grade')"><span class="dot"></span>Grade do curso</button>
+      <button class="tab t-enc" data-s="enc" onclick="go('enc')"><span class="dot"></span>Encontros</button>
+      <button class="tab t-oferta" data-s="oferta" onclick="go('oferta')"><span class="dot"></span>Oferta &amp; preço</button>
+      <button class="tab t-dec" data-s="dec" onclick="go('dec')"><span class="dot"></span>Sala de decisões</button>
+      <button class="tab t-assets" data-s="assets" onclick="go('assets')"><span class="dot"></span>Assets &amp; páginas</button>
+    </nav>
+    <div class="save" id="save-ind">Sincronização: <b>carregando…</b></div>
+  </aside>
+
+  <main>
+    <!-- VISÃO -->
+    <section id="s-visao" class="on">
+      <div class="crumb">O produto em uma tela</div>
+      <h1>Visão geral</h1>
+      <p class="lead">A referência fixa do que estamos construindo — e os atalhos pro material vivo.</p>
+
+      <div class="shortcut">
+        <button class="sc" onclick="openDeck('call')"><span class="k">Apresentação</span><h3>Deck da call de vendas</h3><p>7 slides · abre em modo apresentação</p></button>
+        <button class="sc" onclick="openLanding()"><span class="k">Página</span><h3>Página de aplicação</h3><p>landing completa, navegável</p></button>
+        <button class="sc" onclick="openPais()"><span class="k">Página</span><h3>Página dos Pais</h3><p>o resumo de 1 página pra família</p></button>
+      </div>
+
+      <div class="promessa">
+        <div class="crumb">A promessa</div>
+        <p class="q">“Dos 6 anos de faculdade ao médico que escolhe a própria carreira — o mapa e a sala que separam quem constrói uma carreira cirúrgica de quem sobrevive de plantão.”</p>
+      </div>
+      <div class="grid2">
+        <div class="panel vilao mech"><h4>O vilão</h4><h3>Sobreviver de plantões</h3><p class="muted">O medo dominante da pesquisa: instabilidade, plantão generalista, sem domínio da medicina, sem tempo de vida.</p></div>
+        <div class="panel mech"><h4>A transformação</h4><h3>Mapa, padrinho e sala certa</h3><p class="muted">Tirar o estudante da rota-padrão antes que a formatura decida por ele. Não vendemos conteúdo; vendemos direção.</p></div>
+        <div class="panel mech"><h4>Mecanismo 1 · O Mapa</h4><p class="muted">Plano individual de carreira de 5 anos — revisado pelo Daniel na sessão final.</p></div>
+        <div class="panel mech"><h4>Mecanismo 2 · A Sala</h4><p class="muted">Comunidade com o Daniel + a rede SBN/ABNc por trás dele.</p></div>
+      </div>
+      <div class="panel">
+        <h3>Formato</h3>
+        <p class="muted">8 semanas · 10 vagas · 5 encontros ao vivo de 2h + tarde presencial opcional no CCD · comunidade + sessão individual · garantia de primeira quinzena.</p>
+        <div class="frase">“Eu conheço cirurgiões tecnicamente brilhantes presos em plantão até hoje — porque ninguém ensinou a eles a parte que não é medicina.”</div>
+      </div>
+    </section>
+
+    <!-- GRADE -->
+    <section id="s-grade">
+      <div class="crumb">Aqui o curso nasce</div>
+      <h1>Grade do curso</h1>
+      <p class="lead">Cada módulo tem pauta pré-desenhada, dono e status. O selinho verde do encontro leva direto pra apresentação daquela noite.</p>
+      <div class="progress"><div class="bar"><i id="gbar"></i></div><b id="gtxt"></b></div>
+      <div id="mods"></div>
+      <button class="btn ghost" onclick="addMod()">+ Adicionar módulo</button>
+    </section>
+
+    <!-- ENCONTROS -->
+    <section id="s-enc">
+      <div class="crumb">O programa, noite a noite</div>
+      <h1>Encontros</h1>
+      <p class="lead">Cada encontro tem sua apresentação pronta — clique em Apresentar pra ver em modo slide (e editar qualquer slide ali dentro). Depois é só traduzir pra PPT ou usar direto na tela.</p>
+      <div id="encs"></div>
+    </section>
+
+    <!-- OFERTA -->
+    <section id="s-oferta">
+      <div class="crumb">Preço, escada e upsells</div>
+      <h1>Oferta &amp; preço</h1>
+      <p class="lead">A regra da escada: degrau 1 fechando ≥ 40% confirma o preço; abaixo de 25%, desce ao degrau 2. Preço de tabela não desce.</p>
+      <div class="escada">
+        <div class="degrau"><label>Preço cheio (tabela · turma 2)</label><input type="text" data-bind="precoCheio"><p>Ancora toda a conversa.</p></div>
+        <div class="degrau"><label>Fundadora · degrau 1</label><input type="text" data-bind="precoD1"><p>Testado nas 5–6 primeiras calls.</p></div>
+        <div class="degrau"><label>Fundadora · degrau 2</label><input type="text" data-bind="precoD2"><p>Rede de segurança.</p></div>
+      </div>
+      <h3 style="margin:18px 0 10px;color:var(--navy);font-size:16px;font-family:'Space Grotesk'">Upsells e downsell</h3>
+      <div class="ups" id="ups"></div>
+      <div class="panel" style="margin-top:16px">
+        <h3>Ancoragem tripla (ordem fixa na call)</h3>
+        <p class="muted">1. Cursinho: R$ 4–7 mil/ano, aluno 4.372 de uma plataforma. · 2. Mentoria de médico formado: R$ 10 mil+ — a mesma sala, 5 anos antes. · 3. Consulta: R$ 800–1.000 — aqui são 8 semanas, mais a rede.</p>
+      </div>
+    </section>
+
+    <!-- DECISÕES -->
+    <section id="s-dec">
+      <div class="crumb">Onde vocês dois batem o martelo</div>
+      <h1>Sala de decisões</h1>
+      <p class="lead">Cada pendência já vem com a proposta do Renato no primeiro comentário — o Daniel reage, ajusta e o martelo bate aqui.</p>
+      <div id="decs"></div>
+      <div class="panel">
+        <label>Nova pendência</label>
+        <div class="cmt-new">
+          <input type="text" id="new-dec" placeholder="Ex.: definir data de abertura das aplicações" onkeydown="if(event.key==='Enter')addDec()">
+          <button class="btn primary" onclick="addDec()">Adicionar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ASSETS -->
+    <section id="s-assets">
+      <div class="crumb">Material desenvolvido — validar, ajustar, aprovar</div>
+      <h1>Assets &amp; páginas</h1>
+      <p class="lead">Todo o material de venda em primeira versão. As páginas e apresentações abrem prontas pelos atalhos; os textos-fonte ficam nos cards abaixo.</p>
+      <div class="shortcut">
+        <button class="sc" onclick="openDeck('call')"><span class="k">Apresentação</span><h3>Deck da call</h3><p>modo apresentação · 7 slides</p></button>
+        <button class="sc" onclick="openLanding()"><span class="k">Página</span><h3>Página de aplicação</h3><p>landing navegável (mockup v1)</p></button>
+        <button class="sc" onclick="openPais()"><span class="k">Página</span><h3>Página dos Pais</h3><p>resumo de 1 página pra família</p></button>
+      </div>
+      <div id="assets"></div>
+      <div class="panel">
+        <label>Novo asset</label>
+        <div class="cmt-new">
+          <input type="text" id="new-asset" placeholder="Ex.: roteiro do vídeo de convite" onkeydown="if(event.key==='Enter')addAsset()">
+          <button class="btn primary" onclick="addAsset()">Adicionar</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- GATE DE ACESSO -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="k" style="margin-bottom:8px">Mentoria Rota Cirúrgica · HQ</div>
+    <h3 style="color:var(--navy);margin-bottom:6px">Chave de acesso</h3>
+    <p style="font-size:13px;color:var(--sub);margin-bottom:14px">Espaço privado do Renato e do Dr. Daniel. Digita a chave combinada pra entrar e editar.</p>
+    <input type="password" id="gate-key" placeholder="chave de acesso" onkeydown="if(event.key==='Enter')tryKey()">
+    <p id="gate-msg" style="font-size:12.5px;color:var(--red);margin-top:8px;min-height:16px"></p>
+    <button class="btn primary" style="width:100%;margin-top:6px" onclick="tryKey()">Entrar</button>
+  </div>
+</div>
+
+<!-- SLIDE VIEWER -->
+<div id="viewer">
+  <div class="v-top">
+    <span class="vt" id="v-title"></span>
+    <button onclick="editSlide()">Editar slide</button>
+    <button onclick="closeViewer()">Fechar ✕</button>
+  </div>
+  <div class="v-stage">
+    <button class="v-nav prev" onclick="nav(-1)" aria-label="Anterior">‹</button>
+    <div class="slide" id="v-slide"></div>
+    <button class="v-nav next" onclick="nav(1)" aria-label="Próximo">›</button>
+  </div>
+  <div class="v-count" id="v-count"></div>
+</div>
+
+<!-- editor de slide -->
+<div id="sl-editor">
+  <div class="ed-card">
+    <h3>Editar slide</h3>
+    <div class="fld"><label>Kicker (linha pequena de cima)</label><input type="text" id="ed-k"></div>
+    <div class="fld"><label>Título</label><input type="text" id="ed-t"></div>
+    <div class="fld"><label>Citação (opcional)</label><input type="text" id="ed-q"></div>
+    <div class="fld"><label>Linhas — 1 por linha · em agenda use  20:00 | texto</label><textarea id="ed-l"></textarea></div>
+    <div class="fld" id="ed-nextwrap"><label>Próximo encontro (só no slide de missão)</label><input type="text" id="ed-n"></div>
+    <p id="ed-err" style="display:none;color:var(--red);font-size:12.5px;margin:0 0 8px;font-weight:600"></p>
+    <div class="ed-actions">
+      <button class="btn ghost" onclick="closeEditor()">Cancelar</button>
+      <button class="btn primary" onclick="saveSlide()">Salvar slide</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE OVERLAY -->
+<div id="pageov">
+  <div class="po-top"><span class="vt" id="po-title"></span><button onclick="closePage()">Fechar ✕</button></div>
+  <div class="po-body" id="po-body"></div>
+</div>
+
+<script>
+/* ================= estado ================= */
+const KEY = "mentoria-hq-v4";
+let WHO = "Renato";
+let state = null;
+let saveTimer = null;
+
+function sl(type,k,t,q,lines,next){ return {type,k,t,q:q||"",lines:lines||[],next:next||""}; }
+const seedDecks = {
+  call:{t:"Deck da call de vendas", slides:[
+    {type:"cover2",k:"Turma fundadora · conversa individual",t:"Mentoria Rota Cirúrgica",
+     sub:"Para quem quer carreira cirúrgica — e se recusa a deixar a formatura decidir por ela.",
+     chips:[["10","vagas"],["8","semanas"],["5","encontros ao vivo"],["19/10","primeiro encontro"]],
+     foot:"Dr. Daniel Kirchhoff — neurocirurgião · preceptor SBN   ×   Renato Abdo — estrategista de carreira"},
+    {type:"stairs",k:"Por que essa conversa existe",t:"O caminho padrão termina num lugar só",
+     steps:[["FACULDADE","6 anos no piloto automático"],["DESESPERO DA RESIDÊNCIA","estudar mais como único plano"],["PLANTÃO","o destino de quem não tem mapa"]],
+     note:"Não é falta de capacidade. É falta de mapa — as decisões que evitam o plantão eterno são tomadas ANTES da formatura."},
+    {type:"quote",k:"A virada",
+     q:"Eu conheço cirurgiões tecnicamente brilhantes presos em plantão até hoje — porque ninguém ensinou a eles a parte que não é medicina.",
+     a:"— Dr. Daniel Kirchhoff",
+     note:"Esta mentoria existe pra ensinar as duas metades: a medicina de verdade e a carreira que ninguém mostra."},
+    {type:"duo",k:"O que você leva",t:"Um mapa e uma sala",
+     c1:{ic:"map",label:"O MAPA",title:"Seu plano de carreira de 5 anos",items:["Especialidade-alvo e rota de residência","Marcos por ano + plano B honesto","Página de finanças (a que ninguém faz)","Revisado e assinado pelo Dr. Daniel em sessão individual"]},
+     c2:{ic:"users",label:"A SALA",title:"O acesso que não se compra em curso",items:["Grupo de 10 — pequeno de verdade","Comunidade com o mentor presente","A rede por trás de um preceptor da SBN","Carreira cirúrgica se constrói por quem te conhece antes da prova"]},
+     note:"Não é cursinho. Não é aula gravada. É direção — com quem já percorreu o caminho."},
+    {type:"timeline",k:"Como funciona",t:"8 semanas, lado a lado",
+     nodes:[["19/10","Encontro 1","Abertura + raciocínio clínico","navy"],["02/11","Encontro 2","Bastidor + Residência I","navy"],["16/11","Encontro 3","Currículo + carreira","navy"],["21/11","Tarde no CCD","presencial opcional · SP","orange"],["30/11","Encontro 4","Finanças + marca no CFM","navy"],["12/12","Encontro 5","Seu Plano no hot seat final","teal"]],
+     feats:[["users","Comunidade ativa","o mentor presente entre os encontros"],["mic","Sessão individual","30 min a sós para o seu plano"],["shield","Garantia real","2 primeiros encontros ou 100% de volta"]],
+     note:"Encontros ao vivo de 2h · segundas 20h · encerramento sábado 12/12 pela manhã"},
+    {type:"panels",k:"A grade",t:"Metade medicina real, metade o que ninguém ensina",
+     p1:{label:"MEDICINA QUE A FACULDADE NÃO ENSINA",items:["Raciocínio clínico na prática — casos reais","Bastidor cirúrgico quinzenal","Residência I — o jogo por trás da prova","Residência II — hot seats de currículo e network"]},
+     p2:{label:"O MÉDICO COMO PROFISSIONAL",items:["Carreira e posicionamento nos primeiros 5 anos","Finanças do médico — especialista convidado","Marca pessoal dentro das regras do CFM","Fechamento: seu plano de 5 anos, revisado"]},
+     note:"BÔNUS GRAVADOS: A consulta que fideliza · Do CRM ao primeiro consultório"},
+    {type:"mentors",k:"Quem conduz",t:"Medicina com quem opera. Carreira com quem constrói.",
+     m1:{ini:"DK",nome:"Dr. Daniel Kirchhoff",papel:"MENTOR PRINCIPAL",creds:["Neurocirurgião — CRM 109457 · RQE 65606","Preceptor da Sociedade Brasileira de Neurocirurgia","Fundador do Centro de Combate à Dor (SP)"]},
+     m2:{ini:"RA",nome:"Renato Abdo",papel:"CO-MENTOR DE CARREIRA E NEGÓCIO",creds:["Estrategista de negócios e carreira · autor","Consultor de empresas (método Gargalos Invisíveis)","Conduz carreira, finanças e posicionamento"]}},
+    {type:"closing",k:"Próximo passo",t:"Turma fundadora",
+     stats:[["10","vagas — grupo real"],["19/10","primeiro encontro"],["12/12","encerramento"]],
+     guarantee:"Garantia de primeira quinzena: participe dos 2 primeiros encontros; se não for pra você, devolvemos 100% — sem perguntas.",
+     lines:["Compromisso da fundadora: presença ao vivo · feedback quinzenal · depoimento sincero ao final.","Investimento e condição da turma fundadora: apresentados nesta conversa."]}
+  ]},
+  e1:{t:"Encontro 1 · 19/10 — Abertura + Como um cirurgião pensa", slides:[
+    sl("cover","Encontro 1 · 19/10","Abertura + Como um cirurgião pensa","",["2h ao vivo · câmeras abertas · participação vale mais que anotação · o que é dito na sala fica na sala."]),
+    sl("agenda","Encontro 1 · 19/10","O plano de hoje","",["20:00 | Boas-vindas, regras da sala e o que é a turma fundadora","20:20 | O Mapa: apresentação do Plano de 5 Anos (o entregável do programa)","20:45 | Módulo 1 — Raciocínio clínico na prática real (2 casos)","21:40 | Perguntas abertas + missão da quinzena"]),
+    sl("content","O entregável do programa","O Plano de 5 Anos — sua página","Vocês não saem daqui com anotações. Saem com um plano.",
+      ["O template: especialidade-alvo · rota de residência · marcos por ano · plano B · finanças","Preenchido ao longo das 8 semanas, um pedaço por encontro","Revisado e assinado pelo Dr. Daniel na sessão individual final","Hoje: ninguém precisa saber a resposta — precisa saber as perguntas"]),
+    sl("content","Módulo 1 · Raciocínio clínico","Da queixa à conduta: o framework de 4 perguntas","80% dos pacientes de coluna que me procuram achando que vão operar… não operam.",
+      ["Caso 1 (conservador): por que NÃO operar também é uma decisão ativa","Caso 2 (cirúrgico): o que muda a indicação — e o que o paciente nunca vê","As 4 perguntas que o Daniel faz em todo caso antes de decidir","O que separa quem decora protocolo de quem pensa como especialista"]),
+    sl("mission","Antes do próximo encontro","Missão da quinzena","",
+      ["Rascunhar a página 1 do seu Plano: sonho aos 8 anos, medo aos 8 anos, especialidade-alvo de hoje (pode mudar!)","Postar na comunidade UMA dúvida sobre os casos de hoje","Ler o material de apoio do Módulo 2 (etiqueta de centro cirúrgico)"],
+      "02/11 — Bastidor cirúrgico + Residência I (o jogo por trás da prova)")
+  ]},
+  e2:{t:"Encontro 2 · 02/11 — Bastidor cirúrgico + Residência I", slides:[
+    sl("cover","Encontro 2 · 02/11","Bastidor cirúrgico + Residência I","",["2h ao vivo · traga a matriz de especialidade em branco — ela será preenchida hoje."]),
+    sl("agenda","Encontro 2 · 02/11","O plano de hoje","",["20:00 | Caso da quinzena: o que passou pela mesa do Daniel","20:20 | Bastidor: etiqueta de CC e os 5 comportamentos que marcam um interno","21:00 | Residência I: a matriz de escolha de especialidade","21:45 | Missão da quinzena"]),
+    sl("content","Módulo 2 · Bastidor","Como se destacar (de verdade) no internato","O preceptor não lembra de quem sabe mais. Lembra de quem se comporta melhor sabendo.",
+      ["A hierarquia real do centro cirúrgico — e como navegar sem pisar em ninguém","Os 5 comportamentos que fazem um preceptor lembrar de você (para o bem)","Os 3 que fazem lembrar para o mal — e que quase todo interno comete","Como pedir para participar sem atrapalhar: os scripts que funcionam"]),
+    sl("content","Módulo 3 · Residência I","Escolher especialidade: vocação × mercado × vida","A pergunta não é 'o que eu amo'. É 'que vida eu quero ter — e que preço eu topo pagar'.",
+      ["A matriz de 3 eixos: vocação, mercado e estilo de vida — preenchida ao vivo","A verdade sobre carreira cirúrgica: o que ninguém conta antes da escolha","Cronograma reverso: da vaga desejada até o seu ano atual","Prova ≠ estratégia: onde o cursinho termina e o jogo começa"]),
+    sl("mission","Antes do próximo encontro","Missão da quinzena","",
+      ["Preencher a matriz de especialidade (3 eixos) e trazer pronta","Adicionar ao Plano: a rota de residência preliminar (instituições-alvo)","Gravar 60s se apresentando como se fosse a um preceptor — postar na comunidade"],
+      "16/11 — Hot seats de currículo + Carreira nos primeiros 5 anos")
+  ]},
+  e3:{t:"Encontro 3 · 16/11 — Hot seats de currículo + Os primeiros 5 anos", slides:[
+    sl("cover","Encontro 3 · 16/11","Hot seats de currículo + Os primeiros 5 anos","",["2h ao vivo · 3 currículos da turma serão revisados na tela — voluntários na comunidade."]),
+    sl("agenda","Encontro 3 · 16/11","O plano de hoje","",["20:00 | Anatomia de um currículo que se destaca","20:30 | HOT SEATS: revisão ao vivo de 3 currículos da turma","21:15 | Módulo 5 — Os 4 caminhos do recém-formado + a calculadora da própria hora","21:50 | Missão da quinzena"]),
+    sl("content","Módulo 4 · Residência II","Currículo, cartas e a rede que abre portas","Carreira cirúrgica no Brasil se constrói por quem te conhece antes da prova.",
+      ["O que um avaliador olha nos primeiros 30 segundos (e o que ignora)","Como pedir carta de recomendação: o template e o timing","Ligas, congressos e iniciação: o que pontua e o que só gasta tempo","A rede SBN/ABNc: como um estudante entra nesse circuito hoje"]),
+    sl("content","Módulo 5 · Carreira","Os 4 caminhos depois do CRM — e o preço de cada um","O erro não é escolher um caminho difícil. É não escolher nenhum.",
+      ["R1 direto · ano de mercado · plantão estratégico · pós/mestrado: prós e contras reais","A calculadora da própria hora: quanto vale seu plantão de verdade","PJ vs CLT no início: o que os contratos não contam","Os 5 erros de início de carreira que custam anos (casos reais)"]),
+    sl("mission","Antes do próximo encontro","Missão da quinzena","",
+      ["Revisar o próprio currículo com o checklist de hoje e subir a v2 na comunidade","Adicionar ao Plano: o caminho pós-formatura preferido (e o plano B)","Trazer 1 dúvida de dinheiro para o encontro do contador"],
+      "30/11 — Finanças do médico (convidado) + Marca pessoal dentro do CFM")
+  ]},
+  e4:{t:"Encontro 4 · 30/11 — Finanças do médico + Marca pessoal no CFM", slides:[
+    sl("cover","Encontro 4 · 30/11","Finanças do médico + Marca pessoal no CFM","",["2h ao vivo · convidado: contador especialista em PJ médica."]),
+    sl("agenda","Encontro 4 · 30/11","O plano de hoje","",["20:00 | Convidado: PJ médica na prática (contador especialista)","20:45 | A linha do tempo financeira real do Daniel — o que ele faria diferente","21:10 | Módulo 7 — O que a Resolução CFM 2.336/23 permite e proíbe","21:50 | Missão da quinzena"]),
+    sl("content","Módulo 6 · Finanças","Sair do ciclo 'ganho bem, não sobra nada'","O problema do médico não é ganhar pouco. É decidir tarde.",
+      ["PJ médica sem mistério: impostos, pró-labore e os erros clássicos (convidado)","A regra 50/30/20 adaptada à vida de residente","A linha do tempo do Daniel: as 3 decisões financeiras que ele refaria","Reserva antes de investimento: a ordem que ninguém respeita"]),
+    sl("content","Módulo 7 · Marca pessoal","Autoridade digital dentro das regras do jogo","O CFM não proíbe você de aparecer. Proíbe você de prometer.",
+      ["Resolução 2.336/23 em exemplos: permitido × vedado","Bio e perfil profissional desde a faculdade: o padrão correto","O caso real do próprio Daniel: reposicionamento de perfil como estudo","Conteúdo que constrói autoridade sem risco: os 3 formatos seguros"]),
+    sl("mission","Antes do próximo encontro","Missão da quinzena","",
+      ["Montar (ou corrigir) sua bio profissional no padrão do módulo — postar antes/depois","Adicionar ao Plano: a página de finanças (meta de reserva + regra de orçamento)","Preparar a versão final do Plano de 5 Anos para o encerramento"],
+      "12/12 — Encerramento: seu Plano de 5 Anos no hot seat final")
+  ]},
+  e5:{t:"Encontro 5 · 12/12 — O seu Plano de 5 Anos", slides:[
+    sl("cover","Encontro 5 · 12/12 · Encerramento","O seu Plano de 5 Anos","",["Hot seat final: cada mentorado apresenta o Plano em 5 min e recebe devolutiva ao vivo."]),
+    sl("agenda","Encontro 5 · 12/12","O plano de hoje","",["20:00 | Hot seat final: cada mentorado apresenta seu Plano em 5 min","21:10 | Devolutiva do Daniel + próximos passos de cada um","21:35 | O que continua: comunidade alumni, sessões individuais e a rede","21:50 | Encerramento da turma fundadora"]),
+    sl("content","Módulo 8 · Fechamento","O plano deixa de ser do programa — e vira seu","Um plano que não sobrevive ao contato com a realidade não é plano. Por isso ele tem revisão marcada.",
+      ["Formato do hot seat: 5 min de apresentação + 5 de devolutiva ao vivo","O que um plano forte tem: rota clara, marcos datados, plano B honesto, número financeiro","Sessão individual (30 min): agenda aberta hoje — o Daniel revisa e assina seu Plano","Revisão de 90 dias: o check-in de março para ajustar a rota"]),
+    sl("content","Depois do programa","A Sala continua aberta","Turma fundadora não é a primeira turma. É a turma que constrói as próximas.",
+      ["Comunidade alumni: o grupo não fecha com o programa","O compromisso combinado: depoimento sincero (o bom e o que melhorar)","Prioridade em tudo que vier: turma 2, Dia de Bastidor, eventos da rede","Como indicar um colega para a turma 2 (fevereiro)"]),
+    sl("mission","Encerramento","Missão final","",
+      ["Agendar sua sessão individual de revisão do Plano","Enviar o depoimento em vídeo ou texto (guia na comunidade)","Marcar no calendário a revisão de 90 dias (março)"],
+      "Sessões individuais: agenda aberta · Revisão de 90 dias: março/27")
+  ]}
+};
+
+const ENCONTROS = [
+  {id:"e1", d:"19/10", w:"SEG · 20h", t:"Abertura + Como um cirurgião pensa", m:"Módulos: O Mapa · Raciocínio clínico"},
+  {id:"e2", d:"02/11", w:"SEG · 20h", t:"Bastidor cirúrgico + Residência I", m:"Módulos: Bastidor · Escolha de especialidade"},
+  {id:"e3", d:"16/11", w:"SEG · 20h", t:"Hot seats de currículo + Os primeiros 5 anos", m:"Módulos: Residência II · Carreira"},
+  {id:"pres", d:"21/11", w:"SÁB · 14h", t:"Tarde presencial no CCD (opcional)", m:"Tour + discussão de caso + café com a equipe — São Paulo", pres:true},
+  {id:"e4", d:"30/11", w:"SEG · 20h", t:"Finanças do médico + Marca pessoal no CFM", m:"Módulos: Finanças (convidado) · CFM 2.336/23"},
+  {id:"e5", d:"12/12", w:"SÁB · 10h", t:"Encerramento — O seu Plano de 5 Anos", m:"Hot seat final + transição pra alumni"}
+];
+
+const A_SCRIPT = `## Antes da call (2 min de preparo)
+- Reler a aplicação do lead: ano, especialidade mirada, resposta de "por que quer".
+- Definir o degrau de preço vigente (ver aba Oferta).
+
+## ATO 1 · Diagnóstico (15 min — ele fala 80%)
+> "Antes de eu explicar qualquer coisa, quero te entender. Me conta: em que ano você está e como você chegou até aqui na medicina?"
+> "Daqui a 8 anos, qual é o cenário dos SONHOS? E qual é o que te dá medo?"
+> "E o que você está fazendo HOJE pra garantir que o primeiro aconteça e o segundo não?"
+> "Última do bloco: quem te orienta nisso tudo?"
+- ANOTAR as palavras exatas do sonho e do medo — elas voltam no Ato 3.
+
+## ATO 2 · O problema real (10 min — a virada)
+> "Posso te devolver o que eu ouvi? Você quer [SONHO] e tem medo de [MEDO]. E hoje o teu plano pra isso é, basicamente, estudar mais. Certo?"
+> "O caminho padrão da faculdade termina num lugar só: plantão. Não por falta de capacidade — por falta de mapa."
+- A frase do Daniel (obrigatória): "Eu conheço cirurgiões tecnicamente brilhantes presos em plantão até hoje — porque ninguém ensinou a eles a parte que não é medicina."
+
+## ATO 3 · A solução (10 min)
+> "Em 8 semanas você sai com o teu plano de carreira de 5 anos, escrito e revisado por um neurocirurgião preceptor da SBN — e dentro da sala onde as carreiras cirúrgicas se constroem."
+- Os dois mecanismos: O MAPA + A SALA. Grade em 30 segundos. Garantia de primeira quinzena.
+- Compartilhar tela: Deck da call (atalho na Visão geral).
+
+## ATO 4 · Preço e fechamento (10 min)
+- Ancoragem tripla: cursinho R$ 4–7k/ano → mentoria de formado R$ 10k+ → consulta R$ 800–1.000.
+> "O preço da mentoria é R$ 5.997. Só que essa é a turma fundadora — 10 vagas, e eu quero gente que tope me dar feedback quinzenal e depoimento. Por isso a condição é [DEGRAU VIGENTE], em até 12x."
+- SILÊNCIO. Deixar responder.
+
+## Objeções
+- "Preciso falar com meus pais" → enviar a Página dos Pais + oferecer 15 min com a família.
+- "Está caro" → reancorar + garantia + 12x. Mantendo o não: downsell na saída.
+- "Vou pensar" → "O que exatamente você precisa pensar?" + prazo honesto.
+
+## Nunca dizer
+- "Você vai passar na residência" · "você vai ganhar X" · qualquer garantia de resultado.`;
+
+const A_PAGINA = `## Onde ver
+A landing completa está no atalho "Página de aplicação" (Visão geral ou topo desta aba). Este card guarda as regras da página.
+
+## Estrutura
+Hero (promessa + 10 vagas + início 19/10) → vilão com 3 frases reais da pesquisa → Mapa & Sala → grade em 8 itens → mentores → como funciona + garantia → formulário.
+
+## Formulário de qualificação
+Nome · WhatsApp · e-mail · faculdade/ano · carreira mirada · "por que agora?" (campo que mais qualifica) · quem participa da decisão · topa os compromissos da fundadora?
+
+## Regras
+- Aplicar ≠ comprar: o CTA pede uma conversa de 30 min.
+- Preço NÃO aparece na página — é assunto da call.
+- Rodapé com disclaimer educacional + CRM/RQE do Daniel.`;
+
+const A_PAIS_TXT = `## Onde ver
+A página pronta está no atalho "Página dos Pais". Este card guarda as regras da peça.
+
+## Uso
+Enviada na call quando aparecer "preciso falar com meus pais" (63% são bancados pela família). Tom sóbrio, zero hype.
+
+## Decisões da peça
+- O valor NÃO está impresso ("apresentado na conversa individual") — serve nos dois degraus e mantém o preço com ancoragem, na conversa.
+- Referência de mercado presente: cursinho R$ 4–7k/ano sem acesso ao professor.
+- Garantia em destaque + oferta de 15 min com a família.
+- Disclaimer: não é cursinho, não é atendimento médico, não promete aprovação nem renda.`;
+
+const A_WHATS = `## Regras
+Somente para os 35 que deixaram WhatsApp (opt-in real). 1:1, nunca transmissão fria. Máx. 4 toques. Sem preço por mensagem.
+
+## MSG 1 · Abertura (D0 — Daniel)
+"Oi, [nome]! Aqui é o Dr. Daniel Kirchhoff. Você respondeu minha pesquisa e pediu pra ser avisado — estou cumprindo a promessa em primeira mão. 😊
+Montei com meu sócio uma mentoria de 8 semanas pra estudantes que querem construir carreira (com peso especial pra quem mira área cirúrgica): encontros ao vivo comigo, grupo de 10, e você sai com seu plano de carreira de 5 anos revisado por mim.
+Antes de abrir pra todo mundo, estou chamando quem respondeu pra uma conversa individual de 30 min — sem compromisso. Topas? Te mando os horários."
+
+## MSG 2 · Follow-up (D+2, quem não respondeu)
+"[Nome], sem pressão — só não queria que você perdesse por não ter visto. As conversas estão sendo agendadas essa semana e são 10 vagas. Se não for o momento, me diz e paro por aqui. 🙏"
+
+## MSG 3 · Agendamento
+"Fechado! Horários: [3 opções]. A conversa é comigo e com o Renato, por vídeo. Leva teu sonho e tuas dúvidas — é sobre VOCÊ, não sobre a mentoria."
+
+## MSG 4 · Lembrete (2h antes)
+"Nos vemos às [hora]! Link: [link]. Pensa antes: 'daqui a 8 anos, qual o cenário dos sonhos e qual o que te dá medo?' 😉"
+
+## MSG 5 · Pós-call sem fechamento (D+1)
+"Obrigado pela conversa — gostei do teu momento. Como combinado: [material]. As vagas fecham [data]."`;
+
+const A_DOWNSELL = `## O que é
+Oferta de saída para quem disse NÃO por preço. Nunca pública — só 1:1. Monetiza o não + cria a fila da turma 2.
+
+## Inclui
+Módulos gravados (liberação semanal) · comunidade separada · bônus gravados · upgrade: valor vira crédito integral na turma 2.
+
+## Não inclui (dizer com clareza)
+Encontros ao vivo · hot seats · sessão individual · plano revisado pelo Daniel.
+
+## Preço
+R$ 397 (faixa aprovada: R$ 297–497)
+
+## Script de saída
+"Deixa eu te oferecer um caminho do meio: a trilha gravada — todo o conteúdo, sem os ao vivo — por R$ 397. E se em fevereiro você quiser a turma 2, esse valor vira crédito integral. Faz sentido?"
+- Aceitou: acesso em 24h + tag "fila turma 2". Recusou: agradecer e encerrar bem.`;
+
+const A_BONUS = `## Logística
+1 sessão de gravação em lote (2–3h). Teleprompter com tópicos. Cenário: consultório do CCD. Cada bônus = 3 blocos de 12–18 min.
+
+## BÔNUS 1 · A consulta que fideliza (Daniel)
+1. Os primeiros 3 minutos: como o paciente decide se confia. Escuta ativa com exemplos reais.
+2. Conduzir sem atropelar: explicar em linguagem de gente, checar entendimento, decidir junto.
+3. O pós-consulta que gera retorno e indicação. "A melhor propaganda (e a única 100% permitida) é a consulta excelente."
+
+## BÔNUS 2 · Do CRM ao primeiro consultório (Renato + Daniel)
+1. Os 3 caminhos: montar, associar-se ou credenciar — e o erro de abrir cedo demais.
+2. A conta que ninguém faz: custo fixo, ponto de equilíbrio, convênio vs particular (a decisão real do CCD).
+3. Primeiros pacientes dentro das regras: perfil profissional, indicação, CFM 2.336/23.
+
+## Checklist
+RT/CRM/RQE no encerramento · zero promessa de resultado · casos anonimizados · cortes de 60–90s viram Instagram.`;
+
+const A_ANUNCIO = `## Uso
+SÓ depois dos 35 leads trabalhados 1:1. Anúncio público no perfil do Daniel pra completar a turma, se precisar.
+
+## Post (feed)
+"Durante anos eu ouvi a mesma frase de residentes e internos: 'ninguém nunca me ensinou isso'.
+Não era sobre anatomia. Era sobre carreira. Especialidade, residência, dinheiro, posicionamento — as decisões que definem se a medicina vai ser a profissão dos sonhos ou uma sequência de plantões.
+Então eu montei o que eu queria ter tido: uma mentoria de 8 semanas, em grupo pequeno, onde eu sento com cada aluno até ele sair com um plano de carreira de 5 anos — escrito, revisado, dele.
+Turma fundadora: 10 vagas, e [X] já estão preenchidas. Aplicações no link da bio.
+Mentoria Rota Cirúrgica — pra quem quer escolher a própria carreira. [RT · CRM · RQE]"
+
+## Stories (5 quadros)
+1. Rosto: "Vou contar uma coisa que eu nunca falei aqui…"
+2. "Todo ano vejo médicos brilhantes se formarem sem NENHUM plano. O destino padrão é um só." [PLANTÃO]
+3. "Montei uma mentoria de 8 semanas pra mudar isso ANTES da formatura. Grupo de 10. Ao vivo comigo."
+4. Print da grade com selo "turma fundadora".
+5. CTA: "Aplicações abertas — link aqui" + "vagas: X/10"
+
+## Compliance
+Sem promessa de aprovação/renda · sem depoimento de resultado garantido · RT/CRM/RQE no post fixo.`;
+
+const seed = {
+  precoCheio:"R$ 5.997", precoD1:"R$ 3.497", precoD2:"R$ 2.497",
+  decks: seedDecks,
+  mods:[
+    {t:"Raciocínio clínico na prática real", d:"Como o Daniel pensa um caso, da queixa à conduta. Casos de coluna e dor — incluindo os 80% que não operam.", dono:"Daniel", st:"rascunho", enc:"e1", n:"Pauta v1: 2 casos reais anonimizados (1 conservador, 1 cirúrgico) + o framework de 4 perguntas. Hot seat: alunos recebem 1 caso antes do encontro.", bonus:false},
+    {t:"Bastidor cirúrgico — casos reais quinzenais", d:"Centro cirúrgico, hierarquia, como se destacar no internato. Experiência recorrente, não aula.", dono:"Daniel", st:"rascunho", enc:"e2", n:"Pauta v1: 'a semana que passou' — 1 caso real por encontro (15 min fixos) + etiqueta de CC e os 5 comportamentos que marcam um interno.", bonus:false},
+    {t:"Residência I — o jogo por trás da prova", d:"Escolha de especialidade com honestidade brutal. Estratégia além do edital.", dono:"Daniel", st:"rascunho", enc:"e2", n:"Pauta v1: matriz vocação × mercado × vida + a verdade sobre carreira cirúrgica + cronograma reverso por aluno.", bonus:false},
+    {t:"Residência II — hot seats de currículo e network", d:"Currículo, cartas, ligas, congressos. A rede SBN/ABNc como exemplo vivo.", dono:"Daniel", st:"rascunho", enc:"e3", n:"Pauta v1: anatomia do currículo + template de pedido de carta + hot seat de 3 currículos ao vivo.", bonus:false},
+    {t:"Carreira e posicionamento nos primeiros 5 anos", d:"R1 vs mercado, plantões, PJ/CLT, precificação da própria hora.", dono:"Renato", st:"rascunho", enc:"e3", n:"Pauta v1: os 4 caminhos com prós/contras + calculadora da própria hora + os 5 erros que custam anos.", bonus:false},
+    {t:"Finanças do médico", d:"Impostos, PJ, reserva, primeiros investimentos — convidado + a trajetória real do Daniel.", dono:"Convidado", st:"rascunho", enc:"e4", n:"Pauta v1: PJ médica (contador, 40 min) + linha do tempo financeira do Daniel + 50/30/20 de residente. PENDÊNCIA: definir o contador.", bonus:false},
+    {t:"Marca pessoal e marketing dentro do CFM", d:"Autoridade digital desde a faculdade. Resolução 2.336/2023.", dono:"Renato", st:"rascunho", enc:"e4", n:"Pauta v1: permitido × vedado com exemplos visuais + bio profissional padrão + o reposicionamento do próprio Daniel como estudo.", bonus:false},
+    {t:"O plano de 5 anos de cada mentorado", d:"Hot seat final + sessão individual. O entregável tangível.", dono:"Daniel", st:"rascunho", enc:"e5", n:"Pauta v1: template do Plano (1 página) + hot seat 5+5 min + sessão individual de revisão assinada + check-in de 90 dias.", bonus:false},
+    {t:"Bônus — A consulta que fideliza", d:"Gravado. Comunicação, escuta, retorno e indicação.", dono:"Daniel", st:"rascunho", enc:"", n:"Roteiro no asset 'Pauta de gravação dos bônus'.", bonus:true},
+    {t:"Bônus — Do CRM ao primeiro consultório", d:"Gravado. Montar, associar ou credenciar.", dono:"Renato", st:"rascunho", enc:"", n:"Roteiro no asset 'Pauta de gravação dos bônus'.", bonus:true}
+  ],
+  ups:[
+    {t:"Dia de Bastidor", v:"R$ 497–797", d:"Meio dia de shadowing intensivo (individual ou dupla), conforme normas da instituição. 4–5 vagas, pós-fechamento."},
+    {t:"Pacote 1:1", v:"R$ 997", d:"3 sessões individuais extras de 30 min. Só depois do sim — nunca junto da oferta. Máx. 5."},
+    {t:"Downsell gravado", v:"R$ 397", d:"Módulos gravados + comunidade, sem ao vivo. Vira crédito integral na turma 2."}
+  ],
+  decs:[
+    {t:"Nome da mentoria", d:"Quem decide: Daniel (com propostas do Renato). Usamos 'Rota Cirúrgica' como provisório em todo o material.", st:"pendente", cmts:[
+      {a:"Renato", m:"Minhas 3 propostas, em ordem:\n1. ROTA CIRÚRGICA — direto, dono do posicionamento estreito (já aplicado como provisório em todo o material).\n2. O MAPA — liga com o mecanismo central.\n3. MENTORIA KIRCHHOFF — sobrenome forte, envelhece bem.\nReaja aqui — trocar o nome depois é um replace em todas as peças.", dt:"15/09 09:00"}]},
+    {t:"Posicionamento: estreito (cirúrgico) vs amplo", d:"Quem decide: os dois, pelo comportamento das 5 primeiras calls.", st:"pendente", cmts:[
+      {a:"Renato", m:"Proposta: nascemos ESTREITOS. Dados: cirúrgicos são 29/60 da pesquisa, 79% de intenção (vs 48%) e concentram o topo da disposição a pagar. Nas calls com não-cirúrgicos, testamos a versão ampla como plano B.", dt:"15/09 09:05"}]},
+    {t:"Preço da fundadora: validar degrau R$ 3.497", d:"Quem decide: as calls. ≥40% fecham → confirma. <25% → degrau 2.", st:"pendente", cmts:[
+      {a:"Renato", m:"Operação: as 6 primeiras calls com leads de score máximo (cirúrgico + faixa R$ 3k+ + \"sem mentor e sinto falta\"). Preço cheio R$ 5.997 sempre citado antes da condição. Registro por call: lead / degrau / resultado / objeção. Decidimos após a 6ª.", dt:"15/09 09:10"}]},
+    {t:"Cronograma da turma fundadora", d:"Quem decide: os dois. As datas propostas já estão aplicadas em todo o material.", st:"pendente", cmts:[
+      {a:"Renato", m:"Calendário aplicado no material:\n· 21/09 — abrem aplicações (WhatsApp nos 35 leads)\n· 21/09 a 09/10 — calls\n· 10/10 — fechamento (mín. 8)\n· 19/10 — encontro 1 · quinzenais às segundas 20h\n· Presencial: sáb 21/11, 14h · Encerramento: sáb 12/12, 10h\nSe mudar algo, eu regenero as peças.", dt:"15/09 09:15"}]},
+    {t:"Encontro presencial no CCD: data e formato", d:"Quem decide: Daniel (agenda + normas da clínica).", st:"pendente", cmts:[
+      {a:"Renato", m:"Proposta: sáb 21/11, 14h–18h. Tour + 1 discussão de caso na sala de reunião + café com a equipe. SEM ambiente assistencial com paciente. Confirmar normas do prédio pra visitantes.", dt:"15/09 09:20"}]},
+    {t:"Contador convidado do módulo de finanças", d:"Quem decide: os dois. Trava a pauta do Encontro 4.", st:"pendente", cmts:[
+      {a:"Renato", m:"Critério: especialista em PJ médica que tope gravar sem cobrar (moeda: exposição + menção nos bônus). Daniel: teu contador atual serve? Senão trago 2 opções até 25/09.", dt:"15/09 09:25"}]}
+  ],
+  assets:[
+    {t:"Script final da call de vendas", dono:"Renato", done:false, c:A_SCRIPT},
+    {t:"Página de aplicação — regras e formulário", dono:"Renato", done:false, c:A_PAGINA},
+    {t:"Página dos Pais — regras da peça", dono:"Renato", done:false, c:A_PAIS_TXT},
+    {t:"Sequência de WhatsApp para os 35 leads", dono:"Renato", done:false, c:A_WHATS},
+    {t:"Downsell gravado — oferta e script", dono:"Renato", done:false, c:A_DOWNSELL},
+    {t:"Pauta de gravação dos bônus (2 roteiros)", dono:"Daniel", done:false, c:A_BONUS},
+    {t:"Anúncio público de abertura (post + stories)", dono:"Renato", done:false, c:A_ANUNCIO}
+  ]
+};
+
+/* ================= storage ================= */
+function ind(msg, err){ const el=document.getElementById("save-ind"); el.className="save"+(err?" err":""); el.innerHTML="Sincronização: <b>"+msg+"</b>"; }
+const API = "/api/state";
+let ACCESS = "";
+try{ ACCESS = localStorage.getItem("hq-access-key") || ""; }catch(e){}
+function showGate(msg){
+  document.getElementById("gate").classList.add("on");
+  document.getElementById("gate-msg").textContent = msg || "";
+  setTimeout(()=>{ const i=document.getElementById("gate-key"); if(i) i.focus(); }, 50);
+}
+function hideGate(){ document.getElementById("gate").classList.remove("on"); }
+async function tryKey(){
+  const v = document.getElementById("gate-key").value.trim();
+  if(!v) return;
+  ACCESS = v;
+  try{ localStorage.setItem("hq-access-key", v); }catch(e){}
+  hideGate(); ind("verificando chave…");
+  load();
+}
+async function storeGet(){
+  const r = await fetch(API, {headers:{"x-access-key":ACCESS}});
+  if(r.status === 401) throw {auth:true};
+  if(!r.ok) throw new Error("get_failed");
+  const j = await r.json();
+  return (j && typeof j.v === "string") ? j.v : null;
+}
+async function storeSet(val){
+  const r = await fetch(API, {method:"PUT", headers:{"content-type":"application/json","x-access-key":ACCESS}, body: JSON.stringify({v: val})});
+  if(r.status === 401) throw {auth:true};
+  return r.ok;
+}
+async function load(){
+  try{
+    const v = await storeGet();
+    state = v ? JSON.parse(v) : JSON.parse(JSON.stringify(seed));
+    if(!state.decks) state.decks = JSON.parse(JSON.stringify(seedDecks));
+    ind("em dia");
+  }catch(e){
+    if(e && e.auth){ state = state || JSON.parse(JSON.stringify(seed)); renderAll(); showGate(ACCESS ? "Chave incorreta — tenta de novo." : ""); ind("aguardando chave de acesso", true); return; }
+    state = state || JSON.parse(JSON.stringify(seed)); ind("sem conexão com o servidor", true);
+  }
+  renderAll();
+}
+function save(){
+  ind("salvando…");
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async ()=>{
+    try{
+      const res = await storeSet(JSON.stringify(state));
+      ind(res ? "salvo · " + new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}) : "falhou — tente de novo", !res);
+    }catch(e){ if(e && e.auth){ showGate("Sessão expirada — digita a chave de novo."); ind("aguardando chave de acesso", true); } else { ind("sem conexão — edições não salvas", true); } }
+  }, 600);
+}
+
+/* ================= nav & who ================= */
+function go(s){
+  document.querySelectorAll("main section").forEach(x=>x.classList.remove("on"));
+  document.getElementById("s-"+s).classList.add("on");
+  document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on", x.dataset.s===s));
+}
+function setWho(w){
+  WHO=w;
+  document.getElementById("who-r").classList.toggle("on", w==="Renato");
+  document.getElementById("who-d").classList.toggle("on", w==="Daniel");
+  renderDecs();
+}
+function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function md(src){
+  const lines = esc(src||"").split("\n");
+  let out="", inUl=false;
+  const inline = t => t.replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+  for(const ln of lines){
+    if(ln.startsWith("## ")){ if(inUl){out+="</ul>";inUl=false;} out+="<h4>"+inline(ln.slice(3))+"</h4>"; }
+    else if(ln.startsWith("> ")){ if(inUl){out+="</ul>";inUl=false;} out+='<div class="say">'+inline(ln.slice(2))+"</div>"; }
+    else if(ln.startsWith("- ")){ if(!inUl){out+="<ul>";inUl=true;} out+="<li>"+inline(ln.slice(2))+"</li>"; }
+    else if(ln.trim()===""){ if(inUl){out+="</ul>";inUl=false;} }
+    else { if(inUl){out+="</ul>";inUl=false;} out+="<p>"+inline(ln)+"</p>"; }
+  }
+  if(inUl) out+="</ul>";
+  return out;
+}
+const ST_NEXT = {rascunho:"revisao", revisao:"aprovado", aprovado:"rascunho"};
+const ST_LABEL = {rascunho:"Rascunho", revisao:"Em revisão", aprovado:"Aprovado"};
+const ENC_LABEL = {}; ENCONTROS.forEach(e=>{ if(!e.pres) ENC_LABEL[e.id]="Encontro "+e.id.slice(1)+" · "+e.d; });
+
+/* ================= grade ================= */
+function renderMods(){
+  const box=document.getElementById("mods"); box.innerHTML="";
+  const core = state.mods.filter(m=>!m.bonus).length;
+  const ok = state.mods.filter(m=>!m.bonus && m.st==="aprovado").length;
+  document.getElementById("gbar").style.width = core? (ok/core*100)+"%" : "0%";
+  document.getElementById("gtxt").textContent = "Curso pronto: "+ok+" / "+core+" módulos aprovados";
+  let n=0;
+  state.mods.forEach((m,i)=>{
+    if(!m.bonus) n++;
+    const encPill = m.enc && ENC_LABEL[m.enc] ? `<button class="enc-pill" onclick="event.stopPropagation();openDeck('${m.enc}')" title="Abrir a apresentação do encontro">▶ ${ENC_LABEL[m.enc]}</button>` : "";
+    const el=document.createElement("div");
+    el.className="mod"+(m.st==="aprovado"?" aprovado-b":"")+(m._open?" open":"");
+    el.innerHTML = `
+      <div class="mod-head" onclick="toggleMod(${i})">
+        <span class="num ${m.bonus?'bonus':''}">${m.bonus?'B':n}</span>
+        <span class="t">${esc(m.t)}<small>${m.bonus?'Bônus gravado · ':''}Dono: ${esc(m.dono)}</small></span>
+        ${encPill}
+        <button class="chip ${m.st}" onclick="event.stopPropagation();cycleMod(${i})">${ST_LABEL[m.st]}</button>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 16 16"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <div class="mod-body">
+        <div class="row">
+          <div><label>Título</label><input type="text" value="${esc(m.t)}" onchange="mset(${i},'t',this.value)"></div>
+          <div><label>Dono</label>
+            <select onchange="mset(${i},'dono',this.value)">${["Daniel","Renato","Convidado"].map(o=>`<option ${m.dono===o?"selected":""}>${o}</option>`).join("")}</select>
+          </div>
+        </div>
+        <label>O que este módulo entrega</label>
+        <textarea onchange="mset(${i},'d',this.value)">${esc(m.d)}</textarea>
+        <div style="margin-top:10px"><label>Pauta / notas de construção</label>
+        <textarea onchange="mset(${i},'n',this.value)">${esc(m.n)}</textarea></div>
+        <div class="mod-tools">
+          ${m.enc && ENC_LABEL[m.enc]?`<button class="btn primary tiny" onclick="openDeck('${m.enc}')">▶ Apresentação do encontro</button>`:""}
+          <button class="btn ghost tiny" onclick="moveMod(${i},-1)">↑</button>
+          <button class="btn ghost tiny" onclick="moveMod(${i},1)">↓</button>
+          <button class="btn ghost tiny" onclick="mset(${i},'bonus',${!m.bonus})">${m.bonus?"Tornar principal":"Tornar bônus"}</button>
+          <button class="btn ghost tiny" style="${m._del?'background:var(--red);color:#fff;border-color:var(--red)':'color:var(--red);border-color:#EBC9C9'}" onclick="delMod(${i})">${m._del?'Confirmar exclusão?':'Remover'}</button>
+        </div>
+      </div>`;
+    box.appendChild(el);
+  });
+}
+function toggleMod(i){ state.mods[i]._open=!state.mods[i]._open; renderMods(); }
+function cycleMod(i){ state.mods[i].st=ST_NEXT[state.mods[i].st]; renderMods(); save(); }
+function mset(i,k,v){ state.mods[i][k]=v; renderMods(); save(); }
+function moveMod(i,dir){ const j=i+dir; if(j<0||j>=state.mods.length)return; const o=state.mods[i]; state.mods[i]=state.mods[j]; state.mods[j]=o; renderMods(); save(); }
+function delMod(i){ if(state.mods[i]._del){ state.mods.splice(i,1); renderMods(); save(); } else { state.mods.forEach(m=>m._del=false); state.mods[i]._del=true; renderMods(); } }
+function addMod(){ state.mods.push({t:"Novo módulo", d:"", dono:"Daniel", st:"rascunho", enc:"", n:"", bonus:false, _open:true}); renderMods(); save(); }
+
+/* ================= encontros ================= */
+function renderEncs(){
+  const box=document.getElementById("encs"); box.innerHTML="";
+  ENCONTROS.forEach(e=>{
+    const el=document.createElement("div"); el.className="enc"+(e.pres?" pres":"");
+    el.innerHTML=`
+      <div class="date"><b>${e.d}</b><span>${e.w}</span></div>
+      <div class="info"><h3>${esc(e.t)}</h3><p>${esc(e.m)}</p></div>
+      <div class="acts">
+        ${e.pres
+          ? `<span class="chip mini pendente">formato em decisão</span>`
+          : `<button class="btn dark tiny" onclick="openDeck('${e.id}')">▶ Apresentar</button>`}
+      </div>`;
+    box.appendChild(el);
+  });
+}
+
+/* ================= oferta ================= */
+function renderOferta(){
+  document.querySelectorAll("[data-bind]").forEach(inp=>{
+    inp.value = state[inp.dataset.bind] || "";
+    inp.onchange = ()=>{ state[inp.dataset.bind]=inp.value; save(); };
+  });
+  const box=document.getElementById("ups"); box.innerHTML="";
+  state.ups.forEach((u,i)=>{
+    const el=document.createElement("div"); el.className="up";
+    el.innerHTML=`<h4>${esc(u.t)}</h4>
+      <label>Preço</label><input type="text" value="${esc(u.v)}" onchange="uset(${i},'v',this.value)">
+      <div style="margin-top:8px"><label>Regras</label><textarea onchange="uset(${i},'d',this.value)">${esc(u.d)}</textarea></div>`;
+    box.appendChild(el);
+  });
+}
+function uset(i,k,v){ state.ups[i][k]=v; save(); }
+
+/* ================= decisões ================= */
+function renderDecs(){
+  const box=document.getElementById("decs"); if(!box) return; box.innerHTML="";
+  state.decs.forEach((d,i)=>{
+    const el=document.createElement("div"); el.className="dec";
+    el.innerHTML=`
+      <div class="dec-head">
+        <div class="t"><b>${esc(d.t)}</b><p>${esc(d.d)}</p></div>
+        <button class="chip ${d.st}" onclick="cycleDec(${i})">${d.st==="pendente"?"Pendente":"Decidido"}</button>
+        <button class="btn ghost tiny" style="${d._del?'background:var(--red);color:#fff;border-color:var(--red)':'color:var(--red);border-color:#EBC9C9'}" onclick="delDec(${i})">${d._del?'Confirmar?':'✕'}</button>
+      </div>
+      <div class="comments">
+        ${d.cmts.map(c=>`
+          <div class="cmt">
+            <div class="avatar ${c.a==="Daniel"?"d":""}">${esc(c.a[0])}</div>
+            <div class="bubble">${esc(c.m)}<small>${esc(c.a)} · ${esc(c.dt)}</small></div>
+          </div>`).join("")}
+        <div class="cmt-new">
+          <input type="text" id="cin-${i}" placeholder="Comentar como ${WHO}…" onkeydown="if(event.key==='Enter')addCmt(${i})">
+          <button class="btn primary tiny" onclick="addCmt(${i})">Enviar</button>
+        </div>
+      </div>`;
+    box.appendChild(el);
+  });
+}
+function cycleDec(i){ state.decs[i].st = state.decs[i].st==="pendente"?"decidido":"pendente"; renderDecs(); save(); }
+function addCmt(i){
+  const inp=document.getElementById("cin-"+i); const m=inp.value.trim(); if(!m)return;
+  state.decs[i].cmts.push({a:WHO,m,dt:new Date().toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})+" "+new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})});
+  renderDecs(); save();
+}
+function delDec(i){ if(state.decs[i]._del){ state.decs.splice(i,1); renderDecs(); save(); } else { state.decs.forEach(d=>d._del=false); state.decs[i]._del=true; renderDecs(); } }
+function addDec(){
+  const inp=document.getElementById("new-dec"); const t=inp.value.trim(); if(!t)return;
+  state.decs.push({t, d:"Aberta por "+WHO+".", st:"pendente", cmts:[]}); inp.value="";
+  renderDecs(); save();
+}
+
+/* ================= assets ================= */
+function renderAssets(){
+  const box=document.getElementById("assets"); box.innerHTML="";
+  state.assets.forEach((a,i)=>{
+    const el=document.createElement("div"); el.className="asset"+(a.done?" done":"")+(a._open?" open":"");
+    el.innerHTML=`
+      <div class="asset-head">
+        <input type="checkbox" ${a.done?"checked":""} title="Validado para uso" onchange="aset(${i},'done',this.checked)">
+        <span class="t" onclick="toggleAsset(${i})">${esc(a.t)}<small>${a.done?"Validado":"Aguardando validação"} · Responsável: ${esc(a.dono)}</small></span>
+        <select onchange="aset(${i},'dono',this.value)">${["Renato","Daniel","Equipe"].map(o=>`<option ${a.dono===o?"selected":""}>${o}</option>`).join("")}</select>
+        <button class="btn ghost tiny" onclick="toggleAsset(${i})">${a._open?"Fechar":"Ver material"}</button>
+      </div>
+      <div class="asset-body">
+        ${a._edit
+          ? `<textarea class="raw" id="araw-${i}">${esc(a.c||"")}</textarea>
+             <div class="asset-tools">
+               <button class="btn primary tiny" onclick="saveAssetEdit(${i})">Salvar edição</button>
+               <button class="btn ghost tiny" onclick="aedit(${i},false)">Cancelar</button>
+             </div>`
+          : `<div class="doc">${md(a.c||"Sem material ainda — clique em Editar para escrever.")}</div>
+             <div class="asset-tools">
+               <button class="btn ghost tiny" onclick="aedit(${i},true)">Editar material</button>
+               <button class="btn ghost tiny" onclick="copyAsset(${i})">Copiar texto</button>
+               <button class="btn ghost tiny" style="${a._del?'background:var(--red);color:#fff;border-color:var(--red)':'color:var(--red);border-color:#EBC9C9'}" onclick="delAsset(${i})">${a._del?'Confirmar exclusão?':'Remover'}</button>
+             </div>`}
+      </div>`;
+    box.appendChild(el);
+  });
+}
+function toggleAsset(i){ state.assets[i]._open=!state.assets[i]._open; state.assets[i]._edit=false; renderAssets(); }
+function aedit(i,on){ state.assets[i]._edit=on; renderAssets(); }
+function saveAssetEdit(i){ state.assets[i].c=document.getElementById("araw-"+i).value; state.assets[i]._edit=false; renderAssets(); save(); }
+function copyAsset(i){ navigator.clipboard && navigator.clipboard.writeText(state.assets[i].c||"").then(()=>ind("texto copiado")); }
+function aset(i,k,v){ state.assets[i][k]=v; renderAssets(); save(); }
+function delAsset(i){ if(state.assets[i]._del){ state.assets.splice(i,1); renderAssets(); save(); } else { state.assets.forEach(a=>a._del=false); state.assets[i]._del=true; renderAssets(); } }
+function addAsset(){
+  const inp=document.getElementById("new-asset"); const t=inp.value.trim(); if(!t)return;
+  state.assets.push({t, dono:WHO, done:false, c:"", _open:true, _edit:true}); inp.value=""; renderAssets(); save();
+}
+
+/* ================= SLIDE VIEWER ================= */
+let curDeck=null, curIdx=0;
+function openDeck(id){
+  if(!state || !state.decks || !state.decks[id]) return;
+  curDeck=id; curIdx=0;
+  document.getElementById("viewer").classList.add("on");
+  renderSlide();
+}
+function closeViewer(){ document.getElementById("viewer").classList.remove("on"); curDeck=null; }
+function nav(d){
+  const n=state.decks[curDeck].slides.length;
+  curIdx=Math.min(n-1,Math.max(0,curIdx+d));
+  renderSlide();
+}
+function svgi(name,color){
+  const P={
+    compass:'<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
+    map:'<path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>',
+    users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    check:'<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+    shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+    mic:'<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>',
+    award:'<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>'
+  };
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+(P[name]||P.check)+'</svg>';
+}
+
+function renderSlide(){
+  const deck=state.decks[curDeck], s=deck.slides[curIdx];
+  document.getElementById("v-title").textContent=deck.t;
+  document.getElementById("v-count").textContent=(curIdx+1)+" / "+deck.slides.length+"   ·   use ← → do teclado";
+  const el=document.getElementById("v-slide");
+  el.className="slide"+((s.type==="cover"||s.type==="mission")?" dark":"");
+  let inner="";
+  if(s.type==="cover"){
+    inner=`<div class="sl-pad">
+      <div class="sl-k">${esc(s.k)}</div>
+      <div class="sl-cover-t">${esc(s.t)}</div>
+      ${s.lines.map((l,ix)=> ix===0?`<div class="sl-cover-box">${esc(l)}</div>`:`<div class="sl-cover-sub">${esc(l)}</div>`).join("")}
+      <div class="sl-foot">Mentoria Rota Cirúrgica · turma fundadora</div></div>`;
+  } else if(s.type==="agenda"){
+    inner=`<div class="sl-pad">
+      <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
+      <div class="sl-agenda">${s.lines.map(l=>{
+        const p=l.split("|"); const h=p.length>1?p[0].trim():""; const tx=(p.length>1?p.slice(1).join("|"):l).trim();
+        return `<div class="ag">${h?`<b>${esc(h)}</b>`:""}<span>${esc(tx)}</span></div>`;}).join("")}</div>
+      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+  } else if(s.type==="mission"){
+    inner=`<div class="sl-pad">
+      <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
+      ${s.q?`<div class="sl-quote">“${esc(s.q)}”</div>`:""}
+      <ul class="sl-b">${s.lines.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>
+      ${s.next?`<div class="sl-next"><b>Próximo:</b> <span>${esc(s.next)}</span></div>`:""}
+      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+  }  else if(s.type==="cover2"){
+    el.className="slide dark";
+    inner=`<div class="sl-pad">
+      <div class="sl-k">${esc(s.k)}</div>
+      <div class="sl-cover-t">${esc(s.t)}</div>
+      <div class="sl-cover-sub" style="margin-top:0">${esc(s.sub||"")}</div>
+      <div class="sv-chips">${(s.chips||[]).map(c=>`<div class="sv-chip"><b>${esc(c[0])}</b><span>${esc(c[1])}</span></div>`).join("")}</div>
+      <div class="sv-cover-foot">${esc(s.foot||"")}</div></div>`;
+  } else if(s.type==="stairs"){
+    const pos=[[0,4],[34.5,22],[69,40]], cols=["#EEF2F6","#DCE4EB","#C94F4F"], tcs=["#0E2A45","#0E2A45","#FFFFFF"];
+    inner=`<div class="sl-pad">
+      <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
+      <div class="sv-stairs">
+        ${(s.steps||[]).map((st,i)=>`<div class="sv-step" style="left:${pos[i][0]}%;top:${pos[i][1]}%;background:${cols[i]};color:${tcs[i]}"><b>${esc(st[0])}</b><span style="color:${i==2?'#FAD9D9':'#4A5D6E'}">${esc(st[1])}</span></div>`).join("")}
+        <span class="sv-arr" style="left:31.6%;top:26%">↘</span>
+        <span class="sv-arr" style="left:66.1%;top:44%">↘</span>
+      </div>
+      <div class="sv-note"><b>${esc((s.note||"").split("—")[0])}${(s.note||"").includes("—")?"—":""}</b>${esc((s.note||"").split("—").slice(1).join("—"))}</div>
+      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+  } else if(s.type==="quote"){
+    el.className="slide dark";
+    inner=`<div class="sl-pad">
+      <div class="sl-k">${esc(s.k)}</div>
+      <div class="sv-qmark">“</div>
+      <div class="sv-bigq">${esc(s.q)}</div>
+      <div class="sv-qa">${esc(s.a||"")}</div>
+      ${s.note?`<div class="sv-note">${esc(s.note)}</div>`:""}
+      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+  } else if(s.type==="duo"){
+    const card=(c,cls,icoCol,chkCol,txtCol)=>`<div class="sv-card ${cls}">
+      <div class="sv-ch"><span class="sv-ico">${svgi(c.ic||"map",icoCol)}</span><div><b>${esc(c.label)}</b><span>${esc(c.title||"")}</span></div></div>
+      <ul class="sv-items">${(c.items||[]).map(it=>`<li>${svgi("check",chkCol)}<span style="color:${txtCol}">${esc(it)}</span></li>`).join("")}</ul></div>`;
+    inner=`<div class="sl-pad">
+      <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
+      <div class="sv-duo">
+        ${card(s.c1||{},"c1","#0E2A45","#17A08A","#DCE6EF")}
+        ${card(s.c2||{},"c2","#17A08A","#0E2A45","#FFFFFF")}
+      </div>
+      ${s.note?`<div class="sv-note" style="background:transparent;padding-left:0"><b>${esc(s.note)}</b></div>`:""}
+      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+  } else if(s.type==="timeline"){
+    const CMAP={navy:"#0E2A45",orange:"#F0973B",teal:"#17A08A"};
+    const n=(s.nodes||[]).length;
+    inner=`<div class="sl-pad">
+      <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
+      <div class="sv-tl"><div class="sv-tl-line"></div>
+        ${(s.nodes||[]).map((nd,i)=>{const c=CMAP[nd[3]]||nd[3]||"#0E2A45";const left=(i*(100-16)/(n-1));return `<div class="sv-node" style="left:${left}%"><div class="dt" style="background:${c}">${esc(nd[0])}</div><div class="dot" style="background:${c}"></div><div class="tt">${esc(nd[1])}</div><div class="st">${esc(nd[2])}</div></div>`;}).join("")}
+      </div>
+      <div class="sv-feats">${(s.feats||[]).map(f=>`<div class="sv-feat"><span class="sv-ico">${svgi(f[0],"#17A08A")}</span><div><b>${esc(f[1])}</b><span>${esc(f[2])}</span></div></div>`).join("")}</div>
+      ${s.note?`<div class="sv-line" style="color:#8A97A5;font-style:italic">${esc(s.note)}</div>`:""}
+      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+  } else if(s.type==="panels"){
+    const panel=(p_,cls,start)=>`<div class="sv-panel ${cls}"><div class="lb">${esc(p_.label)}</div>
+      ${(p_.items||[]).map((it,i)=>`<div class="sv-pi"><i>${start+i}</i><span>${esc(it)}</span></div>`).join("")}</div>`;
+    inner=`<div class="sl-pad">
+      <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
+      <div class="sv-panels">${panel(s.p1||{},"p1",1)}${panel(s.p2||{},"p2",(s.p1&&s.p1.items?s.p1.items.length:4)+1)}</div>
+      ${s.note?`<div class="sv-bonus"><b>${esc(s.note.split(":")[0])}:</b>${esc(s.note.split(":").slice(1).join(":"))}</div>`:""}
+      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+  } else if(s.type==="mentors"){
+    const mt=(m,col)=>`<div class="sv-mt"><div class="hd"><span class="sv-av" style="background:${col}">${esc(m.ini)}</span><div><b>${esc(m.nome)}</b><em>${esc(m.papel)}</em></div></div>
+      ${(m.creds||[]).map(c=>`<div class="sv-cred">${svgi("award","#17A08A")}<span>${esc(c)}</span></div>`).join("")}</div>`;
+    inner=`<div class="sl-pad">
+      <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
+      <div class="sv-mentors">${mt(s.m1||{},"#0E2A45")}${mt(s.m2||{},"#17A08A")}</div>
+      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+  } else if(s.type==="closing"){
+    el.className="slide dark";
+    inner=`<div class="sl-pad">
+      <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
+      <div class="sv-stats">${(s.stats||[]).map(st=>`<div class="sv-stat"><b>${esc(st[0])}</b><span>${esc(st[1])}</span></div>`).join("")}</div>
+      <div class="sv-guar">${svgi("shield","#0E2A45")}<div><b>${esc((s.guarantee||"").split(":")[0])}:</b> ${esc((s.guarantee||"").split(":").slice(1).join(":"))}</div></div>
+      ${(s.lines||[]).map(l=>`<div class="sv-line">${l.includes(":")?`<b>${esc(l.split(":")[0])}:</b>${esc(l.split(":").slice(1).join(":"))}`:esc(l)}</div>`).join("")}
+      <div class="sl-foot">Mentoria Rota Cirúrgica · Dr. Daniel Kirchhoff — CRM 109457 · RQE 65606</div></div>`;
+  } else {
+    inner=`<div class="sl-pad">
+      <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
+      ${s.q?`<div class="sl-quote">“${esc(s.q)}”</div>`:""}
+      <ul class="sl-b">${s.lines.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>
+      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+  }
+  el.innerHTML=inner;
+}
+document.addEventListener("keydown",e=>{
+  if(document.getElementById("sl-editor").classList.contains("on")){ if(e.key==="Escape") closeEditor(); return; }
+  if(document.getElementById("viewer").classList.contains("on")){
+    if(e.key==="ArrowRight") nav(1);
+    if(e.key==="ArrowLeft") nav(-1);
+    if(e.key==="Escape") closeViewer();
+    return;
+  }
+  if(document.getElementById("pageov").classList.contains("on") && e.key==="Escape"){ closePage(); }
+});
+const VISUAL_TYPES = ["cover2","stairs","quote","duo","timeline","panels","mentors","closing"];
+function isVisual(t){ return VISUAL_TYPES.indexOf(t)>=0; }
+function setEdMode(json){
+  ["ed-k","ed-t","ed-q"].forEach(id=>document.getElementById(id).parentElement.style.display=json?"none":"block");
+  const llab=document.getElementById("ed-l").previousElementSibling;
+  llab.textContent = json ? "Conteúdo do slide (JSON) — edite os textos entre aspas e salve" : "Linhas — 1 por linha · em agenda use  20:00 | texto";
+}
+function editSlide(){
+  const s=state.decks[curDeck].slides[curIdx];
+  const json=isVisual(s.type);
+  setEdMode(json);
+  if(json){
+    const copy={...s}; 
+    document.getElementById("ed-l").value=JSON.stringify(copy,null,2);
+    document.getElementById("ed-nextwrap").style.display="none";
+  } else {
+    document.getElementById("ed-k").value=s.k||"";
+    document.getElementById("ed-t").value=s.t||"";
+    document.getElementById("ed-q").value=s.q||"";
+    document.getElementById("ed-l").value=(s.lines||[]).join("\n");
+    document.getElementById("ed-n").value=s.next||"";
+    document.getElementById("ed-nextwrap").style.display = s.type==="mission"?"block":"none";
+  }
+  document.getElementById("sl-editor").classList.add("on");
+}
+function closeEditor(){ document.getElementById("sl-editor").classList.remove("on"); const er=document.getElementById("ed-err"); if(er){er.style.display="none";} }
+function saveSlide(){
+  const s=state.decks[curDeck].slides[curIdx];
+  if(isVisual(s.type)){
+    try{
+      const obj=JSON.parse(document.getElementById("ed-l").value);
+      if(!obj.type) obj.type=s.type;
+      state.decks[curDeck].slides[curIdx]=obj;
+    }catch(e){ const er=document.getElementById("ed-err"); er.textContent="JSON inválido — confere vírgulas e aspas e tenta de novo."; er.style.display="block"; return; }
+  } else {
+    s.k=document.getElementById("ed-k").value;
+    s.t=document.getElementById("ed-t").value;
+    s.q=document.getElementById("ed-q").value;
+    s.lines=document.getElementById("ed-l").value.split("\n").map(x=>x.trim()).filter(Boolean);
+    if(s.type==="mission") s.next=document.getElementById("ed-n").value;
+  }
+  closeEditor(); renderSlide(); save();
+}
+
+/* ================= PAGE OVERLAYS ================= */
+function openPage(title, html){
+  document.getElementById("po-title").textContent=title;
+  document.getElementById("po-body").innerHTML=html;
+  document.getElementById("pageov").classList.add("on");
+  document.getElementById("po-body").scrollTop=0;
+}
+function closePage(){ document.getElementById("pageov").classList.remove("on"); }
+
+function openLanding(){
+  openPage("Página de aplicação — mockup v1", `
+  <div class="lp">
+    <header><div class="wrap">
+      <span class="lk">Turma fundadora · 10 vagas · encontros ao vivo</span>
+      <h1>A mentoria para quem quer carreira cirúrgica</h1>
+      <p class="sub">8 semanas com um neurocirurgião preceptor da SBN pra você sair com o seu plano de carreira de 5 anos — antes que a formatura decida por você.</p>
+      <a class="lbtn" href="#" onclick="document.getElementById('lp-aplicar').scrollIntoView({behavior:'smooth'});return false;">Aplicar para a turma fundadora</a>
+      <div class="heroband"><span>Grupo de no máx. 10</span><span>Ao vivo com o mentor</span><span>Início 19/10</span></div>
+    </div></header>
+    <section><div class="wrap">
+      <span class="lk">O problema que ninguém te conta</span>
+      <h2>O caminho padrão da medicina termina num lugar só: plantão</h2>
+      <p class="bigline">Não por falta de capacidade — <b>por falta de mapa</b>. Ouvimos 60 estudantes antes de desenhar este programa. O medo é quase unânime:</p>
+      <div style="margin:18px 0">
+        <div class="qq">“Instabilidade financeira, depender de ser plantonista. Não ter qualidade de vida.”<small>estudante do 5º ano · pesquisa set/2026</small></div>
+        <div class="qq">“Estar na vida de plantão generalista, sem domínio da medicina.”<small>estudante do 4º ano · pesquisa set/2026</small></div>
+        <div class="qq">“Queria que alguém me mostrasse o caminho — a faculdade não faz isso.”<small>interno · pesquisa set/2026</small></div>
+      </div>
+      <p class="bigline">As decisões que evitam esse destino são tomadas <b>antes da formatura</b>. É nessa janela que a mentoria atua.</p>
+    </div></section>
+    <section class="alt"><div class="wrap">
+      <span class="lk">O que você leva</span><h2>Um mapa e uma sala</h2>
+      <div class="mech2">
+        <div class="mcard m1"><span class="lk">Mecanismo 1</span><h3>O Mapa</h3><p>Seu plano de carreira de 5 anos — especialidade-alvo, rota de residência, marcos por ano, plano B e finanças. Revisado pelo Dr. Daniel em sessão individual.</p></div>
+        <div class="mcard m2"><span class="lk">Mecanismo 2</span><h3>A Sala</h3><p>Grupo de 10, comunidade com o mentor presente e a rede por trás de um preceptor da SBN. Carreira cirúrgica se constrói por quem te conhece antes da prova.</p></div>
+      </div>
+    </div></section>
+    <section><div class="wrap">
+      <span class="lk">A grade</span><h2>Metade medicina real. Metade o que ninguém ensina.</h2>
+      <div class="gradegrid">
+        <div class="gitem"><i>1</i>Raciocínio clínico na prática — casos reais</div>
+        <div class="gitem"><i>2</i>Bastidor cirúrgico quinzenal</div>
+        <div class="gitem"><i>3</i>Residência I — o jogo por trás da prova</div>
+        <div class="gitem"><i>4</i>Residência II — hot seats de currículo</div>
+        <div class="gitem b2"><i>5</i>Carreira nos primeiros 5 anos</div>
+        <div class="gitem b2"><i>6</i>Finanças do médico — com convidado</div>
+        <div class="gitem b2"><i>7</i>Marca pessoal dentro do CFM</div>
+        <div class="gitem b2"><i>8</i>Seu plano de 5 anos, revisado</div>
+      </div>
+      <p style="margin-top:12px;font-size:14px;color:var(--sub)">+ Bônus gravados: <b>A consulta que fideliza</b> · <b>Do CRM ao primeiro consultório</b></p>
+    </div></section>
+    <section class="alt"><div class="wrap">
+      <span class="lk">Como funciona</span><h2>8 semanas, lado a lado</h2>
+      <div class="howlist">
+        <div class="hl"><b>5 encontros ao vivo</b><span>2h quinzenais com o Dr. Daniel</span></div>
+        <div class="hl"><b>Comunidade ativa</b><span>o mentor presente entre os encontros</span></div>
+        <div class="hl"><b>Sessão individual</b><span>30 min a sós pro seu plano</span></div>
+        <div class="hl"><b>Tarde no CCD</b><span>presencial opcional em São Paulo</span></div>
+        <div class="hl"><b>10 vagas</b><span>grupo pequeno de verdade</span></div>
+        <div class="hl"><b>Início 19/10</b><span>encerramento 12/12 · seg 20h</span></div>
+      </div>
+      <div class="guarantee"><b>Garantia de primeira quinzena:</b> participe dos 2 primeiros encontros. Se não for pra você, devolvemos 100% — sem perguntas.</div>
+    </div></section>
+    <section id="lp-aplicar"><div class="wrap">
+      <span class="lk">Aplicação · turma fundadora</span>
+      <h2>As conversas são individuais — comece aqui</h2>
+      <p style="color:#C9D6E2;font-size:15px">Aplicar não é comprar: é pedir uma conversa de 30 minutos com os mentores. Vagas por ordem de aplicação aprovada.</p>
+      <div class="form" id="lp-form">
+        <div class="row2">
+          <div class="fld"><label>Nome completo</label><input type="text" placeholder="Seu nome"></div>
+          <div class="fld"><label>WhatsApp</label><input type="text" placeholder="(11) 9…"></div>
+        </div>
+        <div class="row2">
+          <div class="fld"><label>E-mail</label><input type="text" placeholder="voce@email.com"></div>
+          <div class="fld"><label>Faculdade e ano</label><select><option>Selecione…</option><option>1º–2º ano</option><option>3º–4º ano</option><option>Internato (5º–6º)</option><option>Formado há até 2 anos</option></select></div>
+        </div>
+        <div class="fld"><label>Qual carreira você mira?</label><select><option>Selecione…</option><option>Cirúrgica</option><option>Clínica</option><option>Outra</option><option>Ainda em dúvida</option></select></div>
+        <div class="fld"><label>Por que você quer entrar agora?</label><textarea placeholder="Sem resposta certa — queremos entender o seu momento."></textarea></div>
+        <div class="fld"><label>Quem participaria da decisão de investimento?</label><select><option>Selecione…</option><option>Eu mesmo(a)</option><option>Meus pais / família</option><option>Decisão dividida</option></select></div>
+        <div class="fld"><label>Topa os compromissos da fundadora? (presença + feedback + depoimento)</label><select><option>Selecione…</option><option>Sim, topo</option><option>Preciso entender melhor</option></select></div>
+        <button class="lbtn" style="width:100%" onclick="document.getElementById('lp-form').style.display='none';document.getElementById('lp-obrigado').style.display='block';">Enviar aplicação</button>
+        <p class="finep">Sem cobrança nesta etapa. Retornamos no WhatsApp em até 48h. (mockup — envio desativado)</p>
+      </div>
+      <div id="lp-obrigado"><h3>✓ Aplicação recebida</h3><p>Te chamamos no WhatsApp em até 48h pra agendar os 30 minutos.<br>— Dr. Daniel Kirchhoff &amp; Renato Abdo</p></div>
+    </div></section>
+    <footer><div class="wrap">Mentoria Rota Cirúrgica — programa educacional de carreira. Não constitui consulta, atendimento médico, nem garantia de aprovação ou resultado.<br>Resp. técnico do conteúdo médico: Dr. Daniel Kirchhoff — CRM 109457 · RQE 65606 · São Paulo/SP.</div></footer>
+  </div>`);
+}
+
+function openPais(){
+  openPage("Página dos Pais — resumo pra família", `
+  <div style="background:#EDF1F5;min-height:100%;padding:1px">
+    <div class="pais-wrap">
+      <div class="pais-h">
+        <span class="lk">MENTORIA ROTA CIRÚRGICA · TURMA FUNDADORA</span>
+        <h2>Sobre a mentoria — resumo para a família</h2>
+        <p>Dr. Daniel Kirchhoff (neurocirurgião · preceptor SBN) e Renato Abdo (estrategista de carreira e negócios)</p>
+      </div>
+      <div class="pais-b">
+        <p>Seu filho ou sua filha aplicou para a turma fundadora da <b>Mentoria Rota Cirúrgica</b>, conduzida pelo Dr. Daniel Kirchhoff — neurocirurgião, preceptor da Sociedade Brasileira de Neurocirurgia e fundador do Centro de Combate à Dor (São Paulo) — com participação de Renato Abdo, estrategista de carreira e negócios. Este resumo existe para a decisão ser tomada em família, com clareza.</p>
+        <h4>O QUE É</h4>
+        <p>Um programa educacional de 8 semanas, em grupo de no máximo 10 alunos: 5 encontros quinzenais ao vivo com o mentor, comunidade de acompanhamento, uma sessão individual e um encontro presencial opcional na clínica, em São Paulo. O objetivo é um só — terminar com um <b>plano de carreira de 5 anos</b>, escrito pelo aluno e revisado por um especialista que forma médicos residentes há anos.</p>
+        <h4>POR QUE ISSO IMPORTA AGORA</h4>
+        <p>A faculdade forma bem em medicina, mas não orienta carreira. Sem plano, o caminho mais comum do recém-formado é depender de plantões por anos. As decisões que evitam isso — especialidade, residência, posicionamento, finanças — são tomadas <b>antes da formatura</b>.</p>
+        <h4>O QUE NÃO É</h4>
+        <p>Não é cursinho de residência, não é atendimento médico e <b>não promete aprovação nem renda</b>. É orientação estruturada de carreira, com quem já percorreu o caminho.</p>
+        <div class="box"><h4>INVESTIMENTO</h4><p><b>Condição da turma fundadora, em até 12x no cartão</b> (valor apresentado na conversa individual). Referência: um cursinho preparatório custa R$ 4.000–7.000/ano, sem acesso individual ao professor.</p></div>
+        <div class="box g"><h4>GARANTIA</h4><p>Se após os dois primeiros encontros o(a) aluno(a) entender que o programa não é para ele(a), o valor é <b>devolvido integralmente</b> — sem perguntas.</p></div>
+        <p class="cta">Ficamos à disposição para uma conversa de 15 minutos com a família, por vídeo ou telefone, antes de qualquer decisão.</p>
+      </div>
+      <div class="pais-f">Programa educacional de carreira. Não constitui consulta ou atendimento médico. Resp. técnico: Dr. Daniel Kirchhoff — CRM 109457 · RQE 65606 · São Paulo/SP.</div>
+    </div>
+  </div>`);
+}
+
+/* ================= boot ================= */
+function renderAll(){ renderMods(); renderEncs(); renderOferta(); renderDecs(); renderAssets(); }
+load();
+</script>
+</body>
+</html>
