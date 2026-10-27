@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HQ — Mentoria Rota Cirúrgica</title>
+<title>HQ — Mentoria Revolução Sináptica</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:ital@0;1&display=swap" rel="stylesheet">
 <style>
@@ -358,7 +358,7 @@
 <body>
 <div class="shell">
   <aside class="rail">
-    <div class="brand">HQ · Rota Cirúrgica<small>Mentoria Dr. Daniel Kirchhoff · turma fundadora</small></div>
+    <div class="brand">HQ · Revolução Sináptica<small>Mentoria Dr. Daniel Kirchhoff · turma fundadora</small></div>
     <div class="who">
       <p>Quem está editando agora</p>
       <div class="seg">
@@ -392,12 +392,12 @@
 
       <div class="promessa">
         <div class="crumb">A promessa</div>
-        <p class="q">“Dos 6 anos de faculdade ao médico que escolhe a própria carreira — o mapa e a sala que separam quem constrói uma carreira cirúrgica de quem sobrevive de plantão.”</p>
+        <p class="q">“Dos 6 anos de faculdade ao médico que escolhe a própria carreira — a rota e a sala que separam quem constrói uma carreira cirúrgica de quem sobrevive de plantão.”</p>
       </div>
       <div class="grid2">
         <div class="panel vilao mech"><h4>O vilão</h4><h3>Sobreviver de plantões</h3><p class="muted">O medo dominante da pesquisa: instabilidade, plantão generalista, sem domínio da medicina, sem tempo de vida.</p></div>
-        <div class="panel mech"><h4>A transformação</h4><h3>Mapa, padrinho e sala certa</h3><p class="muted">Tirar o estudante da rota-padrão antes que a formatura decida por ele. Não vendemos conteúdo; vendemos direção.</p></div>
-        <div class="panel mech"><h4>Mecanismo 1 · O Mapa</h4><p class="muted">Plano individual de carreira de 5 anos — revisado pelo Daniel na sessão final.</p></div>
+        <div class="panel mech"><h4>A transformação</h4><h3>Rota, padrinho e sala certa</h3><p class="muted">Tirar o estudante da rota-padrão antes que a formatura decida por ele. Não vendemos conteúdo; vendemos direção.</p></div>
+        <div class="panel mech"><h4>Mecanismo 1 · Sua Rota Cirúrgica</h4><p class="muted">O plano de carreira de 5 anos com o nome de cada aluno — construído ao longo do programa, revisado e assinado pelo Daniel. O entregável que dá nome ao jogo.</p></div>
         <div class="panel mech"><h4>Mecanismo 2 · A Sala</h4><p class="muted">Comunidade com o Daniel + a rede SBN/ABNc por trás dele.</p></div>
       </div>
       <div class="panel">
@@ -483,7 +483,7 @@
 <!-- GATE DE ACESSO -->
 <div id="gate">
   <div class="gate-card">
-    <div class="k" style="margin-bottom:8px">Mentoria Rota Cirúrgica · HQ</div>
+    <div class="k" style="margin-bottom:8px">Mentoria Revolução Sináptica · HQ</div>
     <h3 style="color:var(--navy);margin-bottom:6px">Chave de acesso</h3>
     <p style="font-size:13px;color:var(--sub);margin-bottom:14px">Espaço privado do Renato e do Dr. Daniel. Digita a chave combinada pra entrar e editar.</p>
     <input type="password" id="gate-key" placeholder="chave de acesso" onkeydown="if(event.key==='Enter')tryKey()">
@@ -532,7 +532,7 @@
 
 <script>
 /* ================= estado ================= */
-const KEY = "mentoria-hq-v4";
+const KEY = "mentoria-hq-v5";
 let WHO = "Renato";
 let state = null;
 let saveTimer = null;
@@ -540,101 +540,111 @@ let saveTimer = null;
 function sl(type,k,t,q,lines,next){ return {type,k,t,q:q||"",lines:lines||[],next:next||""}; }
 const seedDecks = {
   call:{t:"Deck da call de vendas", slides:[
-    {type:"cover2",k:"Turma fundadora · conversa individual",t:"Mentoria Rota Cirúrgica",
+    {type:"cover2",k:"Turma fundadora · conversa individual",t:"Mentoria Revolução Sináptica",
      sub:"Para quem quer carreira cirúrgica — e se recusa a deixar a formatura decidir por ela.",
-     chips:[["10","vagas"],["8","semanas"],["5","encontros ao vivo"],["19/10","primeiro encontro"]],
+     chips:[["10","vagas"],["8","semanas"],["5","encontros ao vivo"],["+1","tarde no CCD"]],
      foot:"Dr. Daniel Kirchhoff — neurocirurgião · preceptor SBN   ×   Renato Abdo — estrategista de carreira"},
     {type:"stairs",k:"Por que essa conversa existe",t:"O caminho padrão termina num lugar só",
-     steps:[["FACULDADE","6 anos no piloto automático"],["DESESPERO DA RESIDÊNCIA","estudar mais como único plano"],["PLANTÃO","o destino de quem não tem mapa"]],
-     note:"Não é falta de capacidade. É falta de mapa — as decisões que evitam o plantão eterno são tomadas ANTES da formatura."},
+     steps:[["FACULDADE","6 anos no piloto automático"],["DESESPERO DA RESIDÊNCIA","estudar mais como único plano"],["PLANTÃO","o destino de quem não tem plano"]],
+     note:"Não é falta de capacidade. É falta de rota — as decisões que evitam o plantão eterno são tomadas ANTES da formatura."},
     {type:"quote",k:"A virada",
      q:"Eu conheço cirurgiões tecnicamente brilhantes presos em plantão até hoje — porque ninguém ensinou a eles a parte que não é medicina.",
      a:"— Dr. Daniel Kirchhoff",
      note:"Esta mentoria existe pra ensinar as duas metades: a medicina de verdade e a carreira que ninguém mostra."},
-    {type:"duo",k:"O que você leva",t:"Um mapa e uma sala",
-     c1:{ic:"map",label:"O MAPA",title:"Seu plano de carreira de 5 anos",items:["Especialidade-alvo e rota de residência","Marcos por ano + plano B honesto","Página de finanças (a que ninguém faz)","Revisado e assinado pelo Dr. Daniel em sessão individual"]},
+    {type:"duo",k:"O que você leva",t:"Uma rota e uma sala",
+     c1:{ic:"map",label:"SUA ROTA CIRÚRGICA",title:"O plano de 5 anos com o seu nome",items:["Especialidade-alvo e rota de residência","Marcos por ano + plano B honesto","Página de finanças (a que ninguém faz)","Revisada e assinada pelo Dr. Daniel em sessão individual"]},
      c2:{ic:"users",label:"A SALA",title:"O acesso que não se compra em curso",items:["Grupo de 10 — pequeno de verdade","Comunidade com o mentor presente","A rede por trás de um preceptor da SBN","Carreira cirúrgica se constrói por quem te conhece antes da prova"]},
      note:"Não é cursinho. Não é aula gravada. É direção — com quem já percorreu o caminho."},
     {type:"timeline",k:"Como funciona",t:"8 semanas, lado a lado",
-     nodes:[["19/10","Encontro 1","Abertura + raciocínio clínico","navy"],["02/11","Encontro 2","Bastidor + Residência I","navy"],["16/11","Encontro 3","Currículo + carreira","navy"],["21/11","Tarde no CCD","presencial opcional · SP","orange"],["30/11","Encontro 4","Finanças + marca no CFM","navy"],["12/12","Encontro 5","Seu Plano no hot seat final","teal"]],
-     feats:[["users","Comunidade ativa","o mentor presente entre os encontros"],["mic","Sessão individual","30 min a sós para o seu plano"],["shield","Garantia real","2 primeiros encontros ou 100% de volta"]],
-     note:"Encontros ao vivo de 2h · segundas 20h · encerramento sábado 12/12 pela manhã"},
+     nodes:[["ENC 1","Abertura","raciocínio clínico + sua Rota","navy"],["ENC 2","Bastidor","centro cirúrgico + residência","navy"],["ENC 3","Carreira","hot seats de currículo","navy"],["CCD","Presencial","tarde na clínica · SP","orange"],["ENC 4","Dinheiro","finanças + Método Abdo","navy"],["ENC 5","Entrega","sua Rota no hot seat final","teal"]],
+     feats:[["users","Comunidade ativa","o mentor presente entre os encontros"],["mic","Sessão individual","30 min a sós para a sua Rota"],["shield","Garantia real","2 primeiros encontros ou 100% de volta"]],
+     note:"Encontros quinzenais ao vivo de 2h · datas da turma fundadora confirmadas na aprovação da aplicação"},
     {type:"panels",k:"A grade",t:"Metade medicina real, metade o que ninguém ensina",
-     p1:{label:"MEDICINA QUE A FACULDADE NÃO ENSINA",items:["Raciocínio clínico na prática — casos reais","Bastidor cirúrgico quinzenal","Residência I — o jogo por trás da prova","Residência II — hot seats de currículo e network"]},
-     p2:{label:"O MÉDICO COMO PROFISSIONAL",items:["Carreira e posicionamento nos primeiros 5 anos","Finanças do médico — especialista convidado","Marca pessoal dentro das regras do CFM","Fechamento: seu plano de 5 anos, revisado"]},
-     note:"BÔNUS GRAVADOS: A consulta que fideliza · Do CRM ao primeiro consultório"},
+     p1:{label:"MEDICINA QUE A FACULDADE NÃO ENSINA",items:["Raciocínio clínico — o detetive objetivo, com casos reais","Desvendando o centro cirúrgico","Residência: o jogo por trás da prova","Hot seats de currículo e network"]},
+     p2:{label:"O MÉDICO COMO PROFISSIONAL",items:["Carreira e posicionamento nos primeiros 5 anos","Finanças médicas — em dupla com contador convidado","Marketing dentro das regras do CFM (Método Abdo)","Fechamento: sua Rota Cirúrgica, revisada e assinada"]},
+     note:"BÔNUS GRAVADOS: A consulta que fideliza · Do CRM ao 1º consultório · Seguros e processos"},
     {type:"mentors",k:"Quem conduz",t:"Medicina com quem opera. Carreira com quem constrói.",
      m1:{ini:"DK",nome:"Dr. Daniel Kirchhoff",papel:"MENTOR PRINCIPAL",creds:["Neurocirurgião — CRM 109457 · RQE 65606","Preceptor da Sociedade Brasileira de Neurocirurgia","Fundador do Centro de Combate à Dor (SP)"]},
-     m2:{ini:"RA",nome:"Renato Abdo",papel:"CO-MENTOR DE CARREIRA E NEGÓCIO",creds:["Estrategista de negócios e carreira · autor","Consultor de empresas (método Gargalos Invisíveis)","Conduz carreira, finanças e posicionamento"]}},
+     m2:{ini:"RA",nome:"Renato Abdo",papel:"CO-MENTOR DE CARREIRA E NEGÓCIO",creds:["Estrategista de negócios e carreira · autor","Consultor de empresas (método Gargalos Invisíveis)","Conduz o Método Abdo: posicionamento e marketing no CFM"]}},
     {type:"closing",k:"Próximo passo",t:"Turma fundadora",
-     stats:[["10","vagas — grupo real"],["19/10","primeiro encontro"],["12/12","encerramento"]],
+     stats:[["10","vagas — grupo real"],["5+1","encontros ao vivo + tarde no CCD"],["1:1","sessão individual de revisão"]],
      guarantee:"Garantia de primeira quinzena: participe dos 2 primeiros encontros; se não for pra você, devolvemos 100% — sem perguntas.",
      lines:["Compromisso da fundadora: presença ao vivo · feedback quinzenal · depoimento sincero ao final.","Investimento e condição da turma fundadora: apresentados nesta conversa."]}
   ]},
-  e1:{t:"Encontro 1 · 19/10 — Abertura + Como um cirurgião pensa", slides:[
-    sl("cover","Encontro 1 · 19/10","Abertura + Como um cirurgião pensa","",["2h ao vivo · câmeras abertas · participação vale mais que anotação · o que é dito na sala fica na sala."]),
-    sl("agenda","Encontro 1 · 19/10","O plano de hoje","",["20:00 | Boas-vindas, regras da sala e o que é a turma fundadora","20:20 | O Mapa: apresentação do Plano de 5 Anos (o entregável do programa)","20:45 | Módulo 1 — Raciocínio clínico na prática real (2 casos)","21:40 | Perguntas abertas + missão da quinzena"]),
-    sl("content","O entregável do programa","O Plano de 5 Anos — sua página","Vocês não saem daqui com anotações. Saem com um plano.",
-      ["O template: especialidade-alvo · rota de residência · marcos por ano · plano B · finanças","Preenchido ao longo das 8 semanas, um pedaço por encontro","Revisado e assinado pelo Dr. Daniel na sessão individual final","Hoje: ninguém precisa saber a resposta — precisa saber as perguntas"]),
-    sl("content","Módulo 1 · Raciocínio clínico","Da queixa à conduta: o framework de 4 perguntas","80% dos pacientes de coluna que me procuram achando que vão operar… não operam.",
-      ["Caso 1 (conservador): por que NÃO operar também é uma decisão ativa","Caso 2 (cirúrgico): o que muda a indicação — e o que o paciente nunca vê","As 4 perguntas que o Daniel faz em todo caso antes de decidir","O que separa quem decora protocolo de quem pensa como especialista"]),
+  e1:{t:"Encontro 1 — Abertura + Como um cirurgião pensa", slides:[
+    sl("cover","Encontro 1","Abertura + Como um cirurgião pensa","",["2h ao vivo · câmeras abertas · participação vale mais que anotação · o que é dito na sala fica na sala."]),
+    {type:"quote",k:"A conversa que ninguém tem com você · 15 min",q:"Você lembra por que quis ser médico?",a:"— Dr. Daniel",
+     note:"Toda noite começa assim: uma pergunta que ninguém faz, 15 minutos de conversa de verdade — e só depois o conteúdo."},
+    sl("agenda","Encontro 1","O plano de hoje","",["15 min | A conversa que ninguém tem com você — a pergunta da noite","20 min | Boas-vindas, regras da sala e o que é a turma fundadora","25 min | Sua Rota Cirúrgica: o plano de 5 anos que você constrói aqui","45 min | Módulo 1 — Raciocínio clínico: o detetive objetivo (2 casos)","15 min | Perguntas abertas + missão da quinzena"]),
+    sl("content","O entregável do programa","Sua Rota Cirúrgica — o plano com o seu nome","Vocês não saem daqui com anotações. Saem com um plano.",
+      ["O template: especialidade-alvo · rota de residência · marcos por ano · plano B · finanças","Preenchida ao longo das 8 semanas, um pedaço por encontro","Revisada e assinada pelo Dr. Daniel na sessão individual final","Hoje ninguém precisa saber as respostas — precisa conhecer as perguntas"]),
+    sl("content","Módulo 1 · Raciocínio clínico","O detetive objetivo: da queixa ao tripé de diagnóstico","80% dos pacientes de coluna que me procuram achando que vão operar… não operam.",
+      ["Ouvir a queixa, valorizar a queixa, filtrar o que importa e objetivar ao máximo","O tripé: diagnóstico sindrômico → topográfico → etiológico","Exames relevantes · é da sua área ou encaminha certeiro? · a indicação muda o prognóstico","Não precisa saber tudo, mas tem que dar o seu melhor — e absorver dos mais experientes"]),
     sl("mission","Antes do próximo encontro","Missão da quinzena","",
-      ["Rascunhar a página 1 do seu Plano: sonho aos 8 anos, medo aos 8 anos, especialidade-alvo de hoje (pode mudar!)","Postar na comunidade UMA dúvida sobre os casos de hoje","Ler o material de apoio do Módulo 2 (etiqueta de centro cirúrgico)"],
-      "02/11 — Bastidor cirúrgico + Residência I (o jogo por trás da prova)")
+      ["Rascunhar a página 1 da sua Rota: o sonho aos 8 anos, o medo aos 8 anos, a especialidade-alvo de hoje (pode mudar!)","Postar na comunidade UMA dúvida sobre os casos de hoje","Ler o material de apoio: etiqueta do centro cirúrgico"],
+      "Encontro 2 — Desvendando o centro cirúrgico + Residência: o jogo por trás da prova")
   ]},
-  e2:{t:"Encontro 2 · 02/11 — Bastidor cirúrgico + Residência I", slides:[
-    sl("cover","Encontro 2 · 02/11","Bastidor cirúrgico + Residência I","",["2h ao vivo · traga a matriz de especialidade em branco — ela será preenchida hoje."]),
-    sl("agenda","Encontro 2 · 02/11","O plano de hoje","",["20:00 | Caso da quinzena: o que passou pela mesa do Daniel","20:20 | Bastidor: etiqueta de CC e os 5 comportamentos que marcam um interno","21:00 | Residência I: a matriz de escolha de especialidade","21:45 | Missão da quinzena"]),
-    sl("content","Módulo 2 · Bastidor","Como se destacar (de verdade) no internato","O preceptor não lembra de quem sabe mais. Lembra de quem se comporta melhor sabendo.",
-      ["A hierarquia real do centro cirúrgico — e como navegar sem pisar em ninguém","Os 5 comportamentos que fazem um preceptor lembrar de você (para o bem)","Os 3 que fazem lembrar para o mal — e que quase todo interno comete","Como pedir para participar sem atrapalhar: os scripts que funcionam"]),
-    sl("content","Módulo 3 · Residência I","Escolher especialidade: vocação × mercado × vida","A pergunta não é 'o que eu amo'. É 'que vida eu quero ter — e que preço eu topo pagar'.",
-      ["A matriz de 3 eixos: vocação, mercado e estilo de vida — preenchida ao vivo","A verdade sobre carreira cirúrgica: o que ninguém conta antes da escolha","Cronograma reverso: da vaga desejada até o seu ano atual","Prova ≠ estratégia: onde o cursinho termina e o jogo começa"]),
+  e2:{t:"Encontro 2 — Desvendando o centro cirúrgico + Residência I", slides:[
+    sl("cover","Encontro 2","Desvendando o centro cirúrgico + Residência I","",["2h ao vivo · traga a matriz de escolha de especialidade em branco — ela será preenchida hoje."]),
+    {type:"quote",k:"A conversa que ninguém tem com você · 15 min",q:"A depender da especialidade, a desistência da residência chega a 60%. Por quê?",a:"— Dr. Daniel",
+     note:"Como não se frustrar: alinhar expectativa com realidade antes de escolher — não depois."},
+    sl("agenda","Encontro 2","O plano de hoje","",["15 min | A conversa: por que 60% desistem — e como não ser um deles","20 min | Caso da quinzena: o que passou pela mesa do Daniel","40 min | Módulo 2 — Desvendando o centro cirúrgico","40 min | Módulo 3 — Residência: o jogo por trás da prova","5 min | Missão da quinzena"]),
+    sl("content","Módulo 2 · Centro cirúrgico","O habitat sagrado: etiqueta, hierarquia e o ballet","Ali é regime militar — não existe democracia, apenas hierarquia e comando. Quem tem a responsabilidade, comanda.",
+      ["Os tempos do centro cirúrgico — e como orientar paciente e família: o tempo corre diferente lá dentro","A sala funciona como um ballet: onde fica cada um e cada coisa pra não atrapalhar","Esterilidade não é negociável · cirurgia segura e checagens · a entidade Anestesia","O pós que ninguém ensina: documentação, passagem de caso, orientação aos familiares"]),
+    sl("content","Módulo 3 · Residência I","Não é só passar na prova","Agora é o momento de dúvidas e de trocas necessárias: perder para ganhar.",
+      ["Você está no momento? Pessoal, financeiro e maturidade","Especialidade com sabedoria: é teu perfil mesmo? Conhece a rotina? É pesado — você encara?","Os 10 critérios pra escolher onde prestar: cotação, perfil do serviço, prata da casa, o que pontua na prova e no currículo, datas, chefe e preceptores, custo, cidade, ranking","Residência não é hora de ganhar dinheiro, nem de descansar, nem de corpo mole no estudo"]),
     sl("mission","Antes do próximo encontro","Missão da quinzena","",
-      ["Preencher a matriz de especialidade (3 eixos) e trazer pronta","Adicionar ao Plano: a rota de residência preliminar (instituições-alvo)","Gravar 60s se apresentando como se fosse a um preceptor — postar na comunidade"],
-      "16/11 — Hot seats de currículo + Carreira nos primeiros 5 anos")
+      ["Preencher a matriz de escolha (perfil × rotina × encara?) e trazer pronta","Adicionar à sua Rota: os serviços-alvo rankeados pelos 10 critérios","Subir o currículo atual na comunidade — 3 serão revisados ao vivo no próximo encontro"],
+      "Encontro 3 — Hot seats de currículo + Carreira nos primeiros 5 anos")
   ]},
-  e3:{t:"Encontro 3 · 16/11 — Hot seats de currículo + Os primeiros 5 anos", slides:[
-    sl("cover","Encontro 3 · 16/11","Hot seats de currículo + Os primeiros 5 anos","",["2h ao vivo · 3 currículos da turma serão revisados na tela — voluntários na comunidade."]),
-    sl("agenda","Encontro 3 · 16/11","O plano de hoje","",["20:00 | Anatomia de um currículo que se destaca","20:30 | HOT SEATS: revisão ao vivo de 3 currículos da turma","21:15 | Módulo 5 — Os 4 caminhos do recém-formado + a calculadora da própria hora","21:50 | Missão da quinzena"]),
-    sl("content","Módulo 4 · Residência II","Currículo, cartas e a rede que abre portas","Carreira cirúrgica no Brasil se constrói por quem te conhece antes da prova.",
-      ["O que um avaliador olha nos primeiros 30 segundos (e o que ignora)","Como pedir carta de recomendação: o template e o timing","Ligas, congressos e iniciação: o que pontua e o que só gasta tempo","A rede SBN/ABNc: como um estudante entra nesse circuito hoje"]),
-    sl("content","Módulo 5 · Carreira","Os 4 caminhos depois do CRM — e o preço de cada um","O erro não é escolher um caminho difícil. É não escolher nenhum.",
-      ["R1 direto · ano de mercado · plantão estratégico · pós/mestrado: prós e contras reais","A calculadora da própria hora: quanto vale seu plantão de verdade","PJ vs CLT no início: o que os contratos não contam","Os 5 erros de início de carreira que custam anos (casos reais)"]),
+  e3:{t:"Encontro 3 — Hot seats de currículo + Os primeiros 5 anos", slides:[
+    sl("cover","Encontro 3","Hot seats de currículo + Os primeiros 5 anos","",["2h ao vivo · 3 currículos da turma revisados na tela — voluntários na comunidade."]),
+    {type:"quote",k:"A conversa que ninguém tem com você · 15 min",q:"Quero ser um profissional sério ou um picareta?",a:"— Dr. Daniel",
+     note:"Existe espaço pro sacerdócio? E o que o Instagram não conta sobre os atalhos."},
+    sl("agenda","Encontro 3","O plano de hoje","",["15 min | A conversa: sério ou picareta — os atalhos que cobram caro","25 min | Anatomia de um currículo que se destaca","35 min | HOT SEATS: 3 currículos da turma revisados ao vivo","40 min | Módulo 5 — Carreira e posicionamento nos primeiros 5 anos","5 min | Missão da quinzena"]),
+    sl("content","Módulo 4 · Hot seats","Currículo, cartas e a rede que abre portas","Carreira cirúrgica no Brasil se constrói por quem te conhece antes da prova.",
+      ["Análise de currículo personalizada pra escolha de cada um — ao vivo, na tela","O que um avaliador olha nos primeiros 30 segundos (e o que ignora)","Como pedir carta de recomendação: o template e o timing","Ligas, congressos e iniciação: o que pontua e o que só gasta tempo"]),
+    sl("content","Módulo 5 · Carreira","Criar excelência antes de criar marca","Pra ser gourmet ou triple A, primeiro tem que ser bom no que faz. Bons soldados são criados na guerra.",
+      ["Curva de aprendizado e curva acadêmica: paciência pra construir caminho sólido","Análise de mercado — não adianta vender o que não possui; medicina é diferente, não é só vendas","Pensamento de longo prazo, voo de cruzeiro: picaretagens de Instagram têm vida curta","Equipe ou voo solo? Sucesso e grana são consequências de bom plano e bom trabalho"]),
     sl("mission","Antes do próximo encontro","Missão da quinzena","",
-      ["Revisar o próprio currículo com o checklist de hoje e subir a v2 na comunidade","Adicionar ao Plano: o caminho pós-formatura preferido (e o plano B)","Trazer 1 dúvida de dinheiro para o encontro do contador"],
-      "30/11 — Finanças do médico (convidado) + Marca pessoal dentro do CFM")
+      ["Revisar o próprio currículo com o checklist de hoje e subir a v2 na comunidade","Adicionar à sua Rota: o caminho pós-formatura preferido e o plano B","Trazer 1 dúvida de dinheiro pro encontro do contador"],
+      "Encontro 4 — Finanças médicas (com contador convidado) + Método Abdo")
   ]},
-  e4:{t:"Encontro 4 · 30/11 — Finanças do médico + Marca pessoal no CFM", slides:[
-    sl("cover","Encontro 4 · 30/11","Finanças do médico + Marca pessoal no CFM","",["2h ao vivo · convidado: contador especialista em PJ médica."]),
-    sl("agenda","Encontro 4 · 30/11","O plano de hoje","",["20:00 | Convidado: PJ médica na prática (contador especialista)","20:45 | A linha do tempo financeira real do Daniel — o que ele faria diferente","21:10 | Módulo 7 — O que a Resolução CFM 2.336/23 permite e proíbe","21:50 | Missão da quinzena"]),
-    sl("content","Módulo 6 · Finanças","Sair do ciclo 'ganho bem, não sobra nada'","O problema do médico não é ganhar pouco. É decidir tarde.",
-      ["PJ médica sem mistério: impostos, pró-labore e os erros clássicos (convidado)","A regra 50/30/20 adaptada à vida de residente","A linha do tempo do Daniel: as 3 decisões financeiras que ele refaria","Reserva antes de investimento: a ordem que ninguém respeita"]),
-    sl("content","Módulo 7 · Marca pessoal","Autoridade digital dentro das regras do jogo","O CFM não proíbe você de aparecer. Proíbe você de prometer.",
-      ["Resolução 2.336/23 em exemplos: permitido × vedado","Bio e perfil profissional desde a faculdade: o padrão correto","O caso real do próprio Daniel: reposicionamento de perfil como estudo","Conteúdo que constrói autoridade sem risco: os 3 formatos seguros"]),
+  e4:{t:"Encontro 4 — Finanças médicas + Método Abdo", slides:[
+    sl("cover","Encontro 4","Finanças médicas + Método Abdo","",["2h ao vivo · em dupla com contador convidado (especialista na prática médica)."]),
+    {type:"quote",k:"A conversa que ninguém tem com você · 15 min",q:"Dinheiro é pecado?",a:"— Dr. Daniel",
+     note:"A relação do médico com dinheiro — e por que fingir que o tema não existe sai caro."},
+    sl("agenda","Encontro 4","O plano de hoje","",["15 min | A conversa: dinheiro é pecado? Existe espaço pro sacerdócio?","45 min | Módulo 6 — Finanças médicas, em dupla com o contador convidado","20 min | Volume ou qualidade: a conta que define a tua agenda","35 min | Módulo 7 — Método Abdo: autoridade dentro das regras do CFM","5 min | Missão da quinzena"]),
+    sl("content","Módulo 6 · Finanças médicas","Convênio, particular e o vilão chamado imposto","Ganhar no volume ou na qualidade? Antes de escolher, descubra se essa escolha existe.",
+      ["Planos de saúde: burocracia, credenciamento, recebimentos, prazos e descontos — e como lidar com os hospitais","O vilão chamado imposto + por que contabilidade não é opcional (com o contador convidado)","Particular: quanto cobrar, como cobrar, existe demanda?","Planejamento financeiro de quem está começando — montar consultório está no bônus gravado"]),
+    sl("content","Módulo 7 · Método Abdo","Autoridade digital dentro das regras do jogo","O CFM não proíbe você de aparecer. Proíbe você de prometer.",
+      ["Resolução CFM 2.336/23 em exemplos práticos: permitido × vedado","Bio e perfil profissional desde a faculdade: o padrão correto","O reposicionamento do próprio Daniel como estudo de caso","Conteúdo que constrói autoridade sem risco: os formatos seguros"]),
     sl("mission","Antes do próximo encontro","Missão da quinzena","",
-      ["Montar (ou corrigir) sua bio profissional no padrão do módulo — postar antes/depois","Adicionar ao Plano: a página de finanças (meta de reserva + regra de orçamento)","Preparar a versão final do Plano de 5 Anos para o encerramento"],
-      "12/12 — Encerramento: seu Plano de 5 Anos no hot seat final")
+      ["Montar (ou corrigir) sua bio profissional no padrão do módulo — antes/depois na comunidade","Adicionar à sua Rota: a página de finanças (meta de reserva + regra de orçamento)","Preparar a versão final da sua Rota Cirúrgica pro encerramento"],
+      "Encontro 5 — Sua Rota Cirúrgica no hot seat final")
   ]},
-  e5:{t:"Encontro 5 · 12/12 — O seu Plano de 5 Anos", slides:[
-    sl("cover","Encontro 5 · 12/12 · Encerramento","O seu Plano de 5 Anos","",["Hot seat final: cada mentorado apresenta o Plano em 5 min e recebe devolutiva ao vivo."]),
-    sl("agenda","Encontro 5 · 12/12","O plano de hoje","",["20:00 | Hot seat final: cada mentorado apresenta seu Plano em 5 min","21:10 | Devolutiva do Daniel + próximos passos de cada um","21:35 | O que continua: comunidade alumni, sessões individuais e a rede","21:50 | Encerramento da turma fundadora"]),
-    sl("content","Módulo 8 · Fechamento","O plano deixa de ser do programa — e vira seu","Um plano que não sobrevive ao contato com a realidade não é plano. Por isso ele tem revisão marcada.",
-      ["Formato do hot seat: 5 min de apresentação + 5 de devolutiva ao vivo","O que um plano forte tem: rota clara, marcos datados, plano B honesto, número financeiro","Sessão individual (30 min): agenda aberta hoje — o Daniel revisa e assina seu Plano","Revisão de 90 dias: o check-in de março para ajustar a rota"]),
+  e5:{t:"Encontro 5 — Encerramento: sua Rota Cirúrgica", slides:[
+    sl("cover","Encontro 5 · Encerramento","Sua Rota Cirúrgica","",["Hot seat final: cada mentorado apresenta a sua Rota em 5 min e recebe devolutiva ao vivo."]),
+    {type:"quote",k:"A conversa que ninguém tem com você · a última",q:"O caminho não é fixo — sempre dá pra recalcular a rota.",a:"— Dr. Daniel",
+     note:"Medicina ainda vale a pena? O futuro da profissão, a tecnologia — e as prioridades da sua vida."},
+    sl("agenda","Encontro 5","O plano de hoje","",["15 min | A conversa final: recalcular a rota + o futuro da profissão","70 min | Hot seat: cada mentorado apresenta sua Rota em 5 min + devolutiva","20 min | O que continua: comunidade alumni, sessões individuais e a rede","15 min | Encerramento da turma fundadora"]),
+    sl("content","Módulo 8 · O plano personalizado","A Rota deixa de ser do programa — e vira sua","Um plano que não sobrevive ao contato com a realidade não é plano. Por isso ele tem revisão marcada.",
+      ["Formato do hot seat: 5 min de apresentação + 5 de devolutiva ao vivo","O que uma Rota forte tem: caminho claro, marcos datados, plano B honesto, número financeiro","Sessão individual: o Daniel revisa e assina a sua Rota Cirúrgica","Check-in de 90 dias pra ajustar o curso"]),
     sl("content","Depois do programa","A Sala continua aberta","Turma fundadora não é a primeira turma. É a turma que constrói as próximas.",
-      ["Comunidade alumni: o grupo não fecha com o programa","O compromisso combinado: depoimento sincero (o bom e o que melhorar)","Prioridade em tudo que vier: turma 2, Dia de Bastidor, eventos da rede","Como indicar um colega para a turma 2 (fevereiro)"]),
+      ["Comunidade alumni: o grupo não fecha com o programa","O compromisso combinado: depoimento sincero (o bom e o que melhorar)","Prioridade em tudo que vier: turma 2, Dia de Bastidor, eventos da rede","Como indicar um colega para a próxima turma"]),
     sl("mission","Encerramento","Missão final","",
-      ["Agendar sua sessão individual de revisão do Plano","Enviar o depoimento em vídeo ou texto (guia na comunidade)","Marcar no calendário a revisão de 90 dias (março)"],
-      "Sessões individuais: agenda aberta · Revisão de 90 dias: março/27")
+      ["Agendar sua sessão individual de revisão da Rota","Enviar o depoimento em vídeo ou texto (guia na comunidade)","Marcar no calendário o check-in de 90 dias"],
+      "Sessões individuais com agenda aberta · check-in de 90 dias")
   ]}
 };
 
 const ENCONTROS = [
-  {id:"e1", d:"19/10", w:"SEG · 20h", t:"Abertura + Como um cirurgião pensa", m:"Módulos: O Mapa · Raciocínio clínico"},
-  {id:"e2", d:"02/11", w:"SEG · 20h", t:"Bastidor cirúrgico + Residência I", m:"Módulos: Bastidor · Escolha de especialidade"},
-  {id:"e3", d:"16/11", w:"SEG · 20h", t:"Hot seats de currículo + Os primeiros 5 anos", m:"Módulos: Residência II · Carreira"},
-  {id:"pres", d:"21/11", w:"SÁB · 14h", t:"Tarde presencial no CCD (opcional)", m:"Tour + discussão de caso + café com a equipe — São Paulo", pres:true},
-  {id:"e4", d:"30/11", w:"SEG · 20h", t:"Finanças do médico + Marca pessoal no CFM", m:"Módulos: Finanças (convidado) · CFM 2.336/23"},
-  {id:"e5", d:"12/12", w:"SÁB · 10h", t:"Encerramento — O seu Plano de 5 Anos", m:"Hot seat final + transição pra alumni"}
+  {id:"e1", d:"E1", w:"a definir", t:"Abertura + Como um cirurgião pensa", m:"Sua Rota Cirúrgica · Módulo 1 — Raciocínio clínico (o detetive objetivo)"},
+  {id:"e2", d:"E2", w:"a definir", t:"Desvendando o centro cirúrgico + Residência I", m:"Módulos 2 e 3 — o ballet do CC · o jogo por trás da prova"},
+  {id:"e3", d:"E3", w:"a definir", t:"Hot seats de currículo + Os primeiros 5 anos", m:"Módulos 4 e 5 — currículo e network · carreira e posicionamento"},
+  {id:"pres", d:"CCD", w:"a definir", t:"Tarde presencial no CCD (opcional)", m:"Tour + discussão de caso + 'A conversa' versão completa, formato fogueira — São Paulo", pres:true},
+  {id:"e4", d:"E4", w:"a definir", t:"Finanças médicas + Método Abdo", m:"Módulos 6 e 7 — dupla com contador convidado · marketing dentro do CFM"},
+  {id:"e5", d:"E5", w:"a definir", t:"Encerramento — Sua Rota Cirúrgica", m:"Módulo 8 — hot seat final + transição pra alumni"}
 ];
 
 const A_SCRIPT = `## Antes da call (2 min de preparo)
@@ -650,32 +660,32 @@ const A_SCRIPT = `## Antes da call (2 min de preparo)
 
 ## ATO 2 · O problema real (10 min — a virada)
 > "Posso te devolver o que eu ouvi? Você quer [SONHO] e tem medo de [MEDO]. E hoje o teu plano pra isso é, basicamente, estudar mais. Certo?"
-> "O caminho padrão da faculdade termina num lugar só: plantão. Não por falta de capacidade — por falta de mapa."
+> "O caminho padrão da faculdade termina num lugar só: plantão. Não por falta de capacidade — por falta de rota."
 - A frase do Daniel (obrigatória): "Eu conheço cirurgiões tecnicamente brilhantes presos em plantão até hoje — porque ninguém ensinou a eles a parte que não é medicina."
 
 ## ATO 3 · A solução (10 min)
-> "Em 8 semanas você sai com o teu plano de carreira de 5 anos, escrito e revisado por um neurocirurgião preceptor da SBN — e dentro da sala onde as carreiras cirúrgicas se constroem."
-- Os dois mecanismos: O MAPA + A SALA. Grade em 30 segundos. Garantia de primeira quinzena.
+> "Em 8 semanas você sai com a SUA Rota Cirúrgica: teu plano de carreira de 5 anos, escrito e revisado por um neurocirurgião preceptor da SBN — e dentro da sala onde as carreiras cirúrgicas se constroem."
+- Os dois mecanismos: SUA ROTA + A SALA. Grade em 30 segundos. Garantia de primeira quinzena.
 - Compartilhar tela: Deck da call (atalho na Visão geral).
 
 ## ATO 4 · Preço e fechamento (10 min)
-- Ancoragem tripla: cursinho R$ 4–7k/ano → mentoria de formado R$ 10k+ → consulta R$ 800–1.000.
+- Ancoragem tripla: cursinho R$ 4–7k/ano → mentoria de médico formado R$ 10k+ → consulta R$ 800–1.000.
 > "O preço da mentoria é R$ 5.997. Só que essa é a turma fundadora — 10 vagas, e eu quero gente que tope me dar feedback quinzenal e depoimento. Por isso a condição é [DEGRAU VIGENTE], em até 12x."
 - SILÊNCIO. Deixar responder.
 
 ## Objeções
 - "Preciso falar com meus pais" → enviar a Página dos Pais + oferecer 15 min com a família.
 - "Está caro" → reancorar + garantia + 12x. Mantendo o não: downsell na saída.
-- "Vou pensar" → "O que exatamente você precisa pensar?" + prazo honesto.
+- "Vou pensar" → "O que exatamente você precisa pensar?" + prazo honesto: "fecho as vagas dia [DATA]."
 
 ## Nunca dizer
 - "Você vai passar na residência" · "você vai ganhar X" · qualquer garantia de resultado.`;
 
 const A_PAGINA = `## Onde ver
-A landing completa está no atalho "Página de aplicação" (Visão geral ou topo desta aba). Este card guarda as regras da página.
+A landing completa está no atalho "Página de aplicação". Este card guarda as regras da página.
 
 ## Estrutura
-Hero (promessa + 10 vagas + início 19/10) → vilão com 3 frases reais da pesquisa → Mapa & Sala → grade em 8 itens → mentores → como funciona + garantia → formulário.
+Hero (promessa + 10 vagas) → vilão com 3 frases reais da pesquisa → Sua Rota Cirúrgica & A Sala → grade em 8 itens → mentores → como funciona + garantia → formulário.
 
 ## Formulário de qualificação
 Nome · WhatsApp · e-mail · faculdade/ano · carreira mirada · "por que agora?" (campo que mais qualifica) · quem participa da decisão · topa os compromissos da fundadora?
@@ -683,6 +693,7 @@ Nome · WhatsApp · e-mail · faculdade/ano · carreira mirada · "por que agora
 ## Regras
 - Aplicar ≠ comprar: o CTA pede uma conversa de 30 min.
 - Preço NÃO aparece na página — é assunto da call.
+- Datas da turma: confirmadas na aprovação da aplicação (nada de data fixa na página até o calendário fechar).
 - Rodapé com disclaimer educacional + CRM/RQE do Daniel.`;
 
 const A_PAIS_TXT = `## Onde ver
@@ -697,44 +708,48 @@ Enviada na call quando aparecer "preciso falar com meus pais" (63% são bancados
 - Garantia em destaque + oferta de 15 min com a família.
 - Disclaimer: não é cursinho, não é atendimento médico, não promete aprovação nem renda.`;
 
-const A_WHATS = `## Regras
-Somente para os 35 que deixaram WhatsApp (opt-in real). 1:1, nunca transmissão fria. Máx. 4 toques. Sem preço por mensagem.
+const A_WHATS = `## Regras da sequência (REAQUECIMENTO)
+Somente para os 35 que deixaram WhatsApp na pesquisa (opt-in real). 1:1, nunca transmissão fria. Máx. 4 toques; quem pedir pra parar, para. Sem preço por mensagem. A msg 1 RECONHECE o tempo desde setembro — isso é força, não fraqueza: o doc do programa é a prova de que o tempo foi usado construindo.
 
-## MSG 1 · Abertura (D0 — Daniel)
-"Oi, [nome]! Aqui é o Dr. Daniel Kirchhoff. Você respondeu minha pesquisa e pediu pra ser avisado — estou cumprindo a promessa em primeira mão. 😊
-Montei com meu sócio uma mentoria de 8 semanas pra estudantes que querem construir carreira (com peso especial pra quem mira área cirúrgica): encontros ao vivo comigo, grupo de 10, e você sai com seu plano de carreira de 5 anos revisado por mim.
-Antes de abrir pra todo mundo, estou chamando quem respondeu pra uma conversa individual de 30 min — sem compromisso. Topas? Te mando os horários."
+## MSG 1 · Reabertura (D0 — Daniel)
+"Oi, [nome]! Dr. Daniel Kirchhoff aqui. Lá em setembro você respondeu minha pesquisa e pediu pra ser avisado quando a mentoria saísse do papel.
+Demorei mais do que queria — e foi de propósito: passei esses meses desenhando o programa inteiro, módulo por módulo, do raciocínio clínico ao plano de carreira. Agora ficou do tamanho que eu queria te entregar.
+É a Mentoria Revolução Sináptica: 8 semanas, grupo de 10, encontros ao vivo comigo — e você sai com a sua Rota Cirúrgica, teu plano de carreira de 5 anos, revisado por mim.
+Antes de abrir pra todo mundo, tô chamando quem respondeu a pesquisa pra uma conversa individual de 30 min, sem compromisso. Topas? Te mando os horários."
 
 ## MSG 2 · Follow-up (D+2, quem não respondeu)
-"[Nome], sem pressão — só não queria que você perdesse por não ter visto. As conversas estão sendo agendadas essa semana e são 10 vagas. Se não for o momento, me diz e paro por aqui. 🙏"
+"[Nome], sem pressão — só não queria que você perdesse por não ter visto. As conversas da turma fundadora estão sendo agendadas e são 10 vagas. Se não for o momento, me diz e paro por aqui. 🙏"
 
-## MSG 3 · Agendamento
-"Fechado! Horários: [3 opções]. A conversa é comigo e com o Renato, por vídeo. Leva teu sonho e tuas dúvidas — é sobre VOCÊ, não sobre a mentoria."
+## MSG 3 · Agendamento (quem topou)
+"Fechado! Horários: [3 opções]. A conversa é comigo e com o Renato (meu sócio, estrategista de carreira), por vídeo. Leva teu sonho e tuas dúvidas — é sobre VOCÊ, não sobre a mentoria."
 
 ## MSG 4 · Lembrete (2h antes)
-"Nos vemos às [hora]! Link: [link]. Pensa antes: 'daqui a 8 anos, qual o cenário dos sonhos e qual o que te dá medo?' 😉"
+"Nos vemos às [hora]! Link: [link]. Pensa antes na pergunta que eu vou te fazer: daqui a 8 anos, qual o cenário dos sonhos — e qual o que te dá medo? 😉"
 
 ## MSG 5 · Pós-call sem fechamento (D+1)
-"Obrigado pela conversa — gostei do teu momento. Como combinado: [material]. As vagas fecham [data]."`;
+"[Nome], obrigado pela conversa — gostei do teu momento. Como combinado: [material prometido]. Qualquer dúvida, tô aqui. As vagas fecham [data]."`;
 
 const A_DOWNSELL = `## O que é
-Oferta de saída para quem disse NÃO por preço. Nunca pública — só 1:1. Monetiza o não + cria a fila da turma 2.
+Oferta de saída para quem disse NÃO por preço na call. Nunca pública — só 1:1. Monetiza o não + cria a fila da turma 2.
+
+## Nome
+Revolução Sináptica — Trilha Gravada
 
 ## Inclui
-Módulos gravados (liberação semanal) · comunidade separada · bônus gravados · upgrade: valor vira crédito integral na turma 2.
+Módulos gravados (liberação semanal) · comunidade separada · os 3 bônus gravados · upgrade: o valor vira crédito integral na turma 2.
 
 ## Não inclui (dizer com clareza)
-Encontros ao vivo · hot seats · sessão individual · plano revisado pelo Daniel.
+Encontros ao vivo · hot seats · sessão individual · Rota Cirúrgica revisada pelo Daniel.
 
 ## Preço
 R$ 397 (faixa aprovada: R$ 297–497)
 
 ## Script de saída
-"Deixa eu te oferecer um caminho do meio: a trilha gravada — todo o conteúdo, sem os ao vivo — por R$ 397. E se em fevereiro você quiser a turma 2, esse valor vira crédito integral. Faz sentido?"
+"Deixa eu te oferecer um caminho do meio: a Trilha Gravada — todo o conteúdo, sem os ao vivo — por R$ 397. E se você quiser entrar na turma 2, esse valor vira crédito integral. Faz sentido?"
 - Aceitou: acesso em 24h + tag "fila turma 2". Recusou: agradecer e encerrar bem.`;
 
 const A_BONUS = `## Logística
-1 sessão de gravação em lote (2–3h). Teleprompter com tópicos. Cenário: consultório do CCD. Cada bônus = 3 blocos de 12–18 min.
+Sessões de gravação em lote (2–3h cada). Teleprompter com tópicos, não texto decorado. Cenário: consultório do CCD. Cada bônus = 3–4 blocos de 12–18 min.
 
 ## BÔNUS 1 · A consulta que fideliza (Daniel)
 1. Os primeiros 3 minutos: como o paciente decide se confia. Escuta ativa com exemplos reais.
@@ -743,10 +758,18 @@ const A_BONUS = `## Logística
 
 ## BÔNUS 2 · Do CRM ao primeiro consultório (Renato + Daniel)
 1. Os 3 caminhos: montar, associar-se ou credenciar — e o erro de abrir cedo demais.
-2. A conta que ninguém faz: custo fixo, ponto de equilíbrio, convênio vs particular (a decisão real do CCD).
-3. Primeiros pacientes dentro das regras: perfil profissional, indicação, CFM 2.336/23.
+2. Como montar e quanto custa: funcionários, licenças, impostos, recebimentos (pauta do Daniel).
+3. A conta que ninguém faz: custo fixo, ponto de equilíbrio, convênio × particular (a decisão real do CCD).
+4. Primeiros pacientes dentro das regras: perfil profissional, indicação, CFM 2.336/23.
 
-## Checklist
+## BÔNUS 3 · Seguros e processos (convidado jurídico — a definir)
+1. Por que médicos são processados — e por que quase sempre começa em comunicação ruim e prontuário mal feito.
+2. Seguro de responsabilidade civil: o que cobre, o que não cobre, quando contratar.
+3. Prontuário, termo de consentimento e documentação como proteção do médico.
+4. "Fui citado num processo": primeiros passos, sem pânico.
+Regra do bônus 3: conteúdo educacional conduzido pelo convidado advogado (direito médico); zero promessa de blindagem absoluta.
+
+## Checklist geral
 RT/CRM/RQE no encerramento · zero promessa de resultado · casos anonimizados · cortes de 60–90s viram Instagram.`;
 
 const A_ANUNCIO = `## Uso
@@ -755,14 +778,13 @@ SÓ depois dos 35 leads trabalhados 1:1. Anúncio público no perfil do Daniel p
 ## Post (feed)
 "Durante anos eu ouvi a mesma frase de residentes e internos: 'ninguém nunca me ensinou isso'.
 Não era sobre anatomia. Era sobre carreira. Especialidade, residência, dinheiro, posicionamento — as decisões que definem se a medicina vai ser a profissão dos sonhos ou uma sequência de plantões.
-Então eu montei o que eu queria ter tido: uma mentoria de 8 semanas, em grupo pequeno, onde eu sento com cada aluno até ele sair com um plano de carreira de 5 anos — escrito, revisado, dele.
-Turma fundadora: 10 vagas, e [X] já estão preenchidas. Aplicações no link da bio.
-Mentoria Rota Cirúrgica — pra quem quer escolher a própria carreira. [RT · CRM · RQE]"
+Então eu montei o que eu queria ter tido: a Mentoria Revolução Sináptica. 8 semanas, grupo pequeno, ao vivo comigo — até cada aluno sair com a própria Rota Cirúrgica: um plano de carreira de 5 anos, escrito, revisado, dele.
+Turma fundadora: 10 vagas, e [X] já estão preenchidas. Aplicações no link da bio. [RT · CRM · RQE]"
 
 ## Stories (5 quadros)
 1. Rosto: "Vou contar uma coisa que eu nunca falei aqui…"
 2. "Todo ano vejo médicos brilhantes se formarem sem NENHUM plano. O destino padrão é um só." [PLANTÃO]
-3. "Montei uma mentoria de 8 semanas pra mudar isso ANTES da formatura. Grupo de 10. Ao vivo comigo."
+3. "Montei uma mentoria pra mudar isso ANTES da formatura. Grupo de 10. Ao vivo comigo."
 4. Print da grade com selo "turma fundadora".
 5. CTA: "Aplicações abertas — link aqui" + "vagas: X/10"
 
@@ -770,46 +792,51 @@ Mentoria Rota Cirúrgica — pra quem quer escolher a própria carreira. [RT · 
 Sem promessa de aprovação/renda · sem depoimento de resultado garantido · RT/CRM/RQE no post fixo.`;
 
 const seed = {
+  ver:"v5",
   precoCheio:"R$ 5.997", precoD1:"R$ 3.497", precoD2:"R$ 2.497",
   decks: seedDecks,
   mods:[
-    {t:"Raciocínio clínico na prática real", d:"Como o Daniel pensa um caso, da queixa à conduta. Casos de coluna e dor — incluindo os 80% que não operam.", dono:"Daniel", st:"rascunho", enc:"e1", n:"Pauta v1: 2 casos reais anonimizados (1 conservador, 1 cirúrgico) + o framework de 4 perguntas. Hot seat: alunos recebem 1 caso antes do encontro.", bonus:false},
-    {t:"Bastidor cirúrgico — casos reais quinzenais", d:"Centro cirúrgico, hierarquia, como se destacar no internato. Experiência recorrente, não aula.", dono:"Daniel", st:"rascunho", enc:"e2", n:"Pauta v1: 'a semana que passou' — 1 caso real por encontro (15 min fixos) + etiqueta de CC e os 5 comportamentos que marcam um interno.", bonus:false},
-    {t:"Residência I — o jogo por trás da prova", d:"Escolha de especialidade com honestidade brutal. Estratégia além do edital.", dono:"Daniel", st:"rascunho", enc:"e2", n:"Pauta v1: matriz vocação × mercado × vida + a verdade sobre carreira cirúrgica + cronograma reverso por aluno.", bonus:false},
-    {t:"Residência II — hot seats de currículo e network", d:"Currículo, cartas, ligas, congressos. A rede SBN/ABNc como exemplo vivo.", dono:"Daniel", st:"rascunho", enc:"e3", n:"Pauta v1: anatomia do currículo + template de pedido de carta + hot seat de 3 currículos ao vivo.", bonus:false},
-    {t:"Carreira e posicionamento nos primeiros 5 anos", d:"R1 vs mercado, plantões, PJ/CLT, precificação da própria hora.", dono:"Renato", st:"rascunho", enc:"e3", n:"Pauta v1: os 4 caminhos com prós/contras + calculadora da própria hora + os 5 erros que custam anos.", bonus:false},
-    {t:"Finanças do médico", d:"Impostos, PJ, reserva, primeiros investimentos — convidado + a trajetória real do Daniel.", dono:"Convidado", st:"rascunho", enc:"e4", n:"Pauta v1: PJ médica (contador, 40 min) + linha do tempo financeira do Daniel + 50/30/20 de residente. PENDÊNCIA: definir o contador.", bonus:false},
-    {t:"Marca pessoal e marketing dentro do CFM", d:"Autoridade digital desde a faculdade. Resolução 2.336/2023.", dono:"Renato", st:"rascunho", enc:"e4", n:"Pauta v1: permitido × vedado com exemplos visuais + bio profissional padrão + o reposicionamento do próprio Daniel como estudo.", bonus:false},
-    {t:"O plano de 5 anos de cada mentorado", d:"Hot seat final + sessão individual. O entregável tangível.", dono:"Daniel", st:"rascunho", enc:"e5", n:"Pauta v1: template do Plano (1 página) + hot seat 5+5 min + sessão individual de revisão assinada + check-in de 90 dias.", bonus:false},
-    {t:"Bônus — A consulta que fideliza", d:"Gravado. Comunicação, escuta, retorno e indicação.", dono:"Daniel", st:"rascunho", enc:"", n:"Roteiro no asset 'Pauta de gravação dos bônus'.", bonus:true},
-    {t:"Bônus — Do CRM ao primeiro consultório", d:"Gravado. Montar, associar ou credenciar.", dono:"Renato", st:"rascunho", enc:"", n:"Roteiro no asset 'Pauta de gravação dos bônus'.", bonus:true}
+    {t:"Raciocínio clínico — o detetive objetivo", d:"Como o Daniel pensa um caso: ouvir e valorizar a queixa, filtrar o que importa, objetivar as informações e fechar o tripé de diagnóstico — sindrômico, topográfico e etiológico.", dono:"Daniel", st:"revisao", enc:"e1", n:"Pauta do Daniel (doc out/26): associar exame físico e diagnóstico · pedir exames relevantes · é da sua área ou encaminha de forma certeira? · saber o tratamento preciso — a indicação muda o prognóstico · dar atenção ao paciente · 'não precisa saber tudo, mas tem que dar seu melhor' · aprender com a equipe e os mais experientes. Formato: 2 casos ao vivo (1 conservador, 1 cirúrgico).", bonus:false},
+    {t:"Desvendando o centro cirúrgico", d:"A mística do CC por dentro: etiqueta, hierarquia e comportamento. 'A sala cirúrgica funciona como um ballet.'", dono:"Daniel", st:"revisao", enc:"e2", n:"Pauta do Daniel: os tempos do CC e como orientar paciente e família ('o tempo corre diferente lá dentro') · 'ali é regime militar — não existe democracia, apenas hierarquia e comando; quem tem a responsabilidade, comanda' · dinâmica das disposições: onde fica cada um e cada coisa · esterilidade não é negociável · cirurgia segura e checagens · a entidade Anestesia · funções da equipe multidisciplinar · burocracia pós: documentação, passagem de caso, orientações aos familiares.", bonus:false},
+    {t:"Residência: o jogo por trás da prova", d:"Não é só passar na prova: é saber se é o momento, escolher a especialidade com sabedoria e escolher os lugares com estratégia.", dono:"Daniel", st:"revisao", enc:"e2", n:"Pauta do Daniel: o momento — pessoal, financeiro, maturidade · especialidade: é teu perfil? conhece a rotina? encara? · os 10 critérios de escolha de serviço: cotação, perfil do serviço, prata da casa, o que pontua na prova, o que pontua no currículo, datas das provas, chefe e preceptores, custo, cidade/logística, ranking das opções · saber desistir ('perder para ganhar') · 'residência não é hora de ganhar dinheiro, nem de descansar, nem de corpo mole' · dicas pra extrair o máximo do tempo curto.", bonus:false},
+    {t:"Hot seats, currículo e network", d:"Análise de currículo personalizada pra escolha de cada um — ao vivo, na tela.", dono:"Daniel", st:"revisao", enc:"e3", n:"Pauta: hot seat de 3 currículos por encontro · o que o avaliador olha nos primeiros 30 segundos · template de pedido de carta de recomendação · ligas, congressos e iniciação: o que pontua e o que só gasta tempo · como um estudante entra no circuito SBN/ABNc hoje.", bonus:false},
+    {t:"Carreira e posicionamento nos primeiros 5 anos", d:"Criar excelência antes de criar marca: 'pra ser gourmet ou triple A, primeiro tem que ser bom no que faz'.", dono:"Daniel", st:"revisao", enc:"e3", n:"Pauta do Daniel: curva de aprendizado + curva acadêmica e científica · 'bons soldados são criados na guerra' · análise de mercado — não adianta vender o que não possui · 'medicina é diferente, não é só vendas' · pensamento de longo prazo: voo de cruzeiro · 'picaretagens de Instagram têm vida curta' · equipe ou voo solo? · 'sucesso e grana são consequências de um bom plano e bom trabalho'. Co-condução com Renato (mercado e posicionamento).", bonus:false},
+    {t:"Finanças médicas — em dupla com contador", d:"O jogo financeiro da prática: convênios, particular e 'o vilão chamado imposto'. Contador convidado traz a técnica; Daniel, a vivência.", dono:"Convidado", st:"revisao", enc:"e4", n:"Pauta do Daniel: planos de saúde — burocracia, credenciamento, recebimentos/prazos/descontos, imposto, contabilidade, como lidar com hospitais · particular — quanto cobrar, como cobrar, existe demanda? · ganhar no volume ou na qualidade: existe essa escolha? · planejamento financeiro. PENDÊNCIA: confirmar o contador convidado. Montar consultório migrou pro bônus 'Do CRM ao 1º consultório'.", bonus:false},
+    {t:"Método Abdo — marketing dentro do CFM", d:"Autoridade digital dentro das regras do jogo: Resolução CFM 2.336/23, bio profissional e os formatos seguros.", dono:"Renato", st:"revisao", enc:"e4", n:"Pauta: permitido × vedado com exemplos visuais · bio e perfil profissional desde a faculdade · o reposicionamento do próprio Daniel como estudo de caso · conteúdo que constrói autoridade sem risco.", bonus:false},
+    {t:"Sua Rota Cirúrgica — o plano personalizado", d:"O entregável do programa: o plano de carreira de 5 anos de cada mentorado — hot seat final + sessão individual com revisão assinada pelo Daniel.", dono:"Daniel", st:"revisao", enc:"e5", n:"Pauta: template da Rota (1 página: especialidade-alvo, rota de residência, marcos por ano, plano B, finanças), preenchida ao longo do programa · hot seat 5+5 min · sessão individual de 30 min com revisão assinada · check-in de 90 dias.", bonus:false},
+    {t:"A conversa que ninguém tem com você", d:"O fio condutor do programa: 15 minutos abrindo cada encontro, uma pergunta de cada vez — e a versão completa na tarde presencial do CCD, formato fogueira.", dono:"Daniel", st:"revisao", enc:"", n:"As perguntas do Daniel: você lembra por que quis ser médico? · gosta de cuidar de gente? · não se achou na profissão — temos alternativas? · a desistência da residência chega a 60%: por quê? · como não se frustrar: alinhar expectativa com realidade · sério ou picareta? · existe espaço pro sacerdócio? dinheiro é pecado? · vida pessoal × profissional: quais as tuas prioridades? · o caminho não é fixo — sempre dá pra recalcular a rota · medicina ainda vale a pena? · o futuro da profissão e as adaptações à tecnologia.", bonus:false},
+    {t:"Bônus — A consulta que fideliza", d:"Gravado. Comunicação, escuta, retorno e indicação.", dono:"Daniel", st:"rascunho", enc:"", n:"Roteiro completo no asset 'Pauta de gravação dos bônus'.", bonus:true},
+    {t:"Bônus — Do CRM ao primeiro consultório", d:"Gravado. Montar, associar ou credenciar + quanto custa de verdade (funcionários, licenças, impostos, recebimentos) + convênio × particular.", dono:"Renato", st:"rascunho", enc:"", n:"Absorveu a parte 'montar consultório' do módulo de finanças (pauta do Daniel). Roteiro no asset 'Pauta de gravação dos bônus'.", bonus:true},
+    {t:"Bônus — Seguros e processos", d:"Gravado, com convidado jurídico (a definir). Responsabilidade civil, seguro, prontuário como proteção e o que fazer ao ser citado num processo.", dono:"Convidado", st:"rascunho", enc:"", n:"Convidado: advogado(a) de direito médico, a definir. Roteiro no asset 'Pauta de gravação dos bônus'.", bonus:true}
   ],
   ups:[
     {t:"Dia de Bastidor", v:"R$ 497–797", d:"Meio dia de shadowing intensivo (individual ou dupla), conforme normas da instituição. 4–5 vagas, pós-fechamento."},
     {t:"Pacote 1:1", v:"R$ 997", d:"3 sessões individuais extras de 30 min. Só depois do sim — nunca junto da oferta. Máx. 5."},
-    {t:"Downsell gravado", v:"R$ 397", d:"Módulos gravados + comunidade, sem ao vivo. Vira crédito integral na turma 2."}
+    {t:"Trilha Gravada (downsell)", v:"R$ 397", d:"Módulos gravados + comunidade, sem ao vivo. O valor vira crédito integral na turma 2."}
   ],
   decs:[
-    {t:"Nome da mentoria", d:"Quem decide: Daniel (com propostas do Renato). Usamos 'Rota Cirúrgica' como provisório em todo o material.", st:"pendente", cmts:[
-      {a:"Renato", m:"Minhas 3 propostas, em ordem:\n1. ROTA CIRÚRGICA — direto, dono do posicionamento estreito (já aplicado como provisório em todo o material).\n2. O MAPA — liga com o mecanismo central.\n3. MENTORIA KIRCHHOFF — sobrenome forte, envelhece bem.\nReaja aqui — trocar o nome depois é um replace em todas as peças.", dt:"15/09 09:00"}]},
-    {t:"Posicionamento: estreito (cirúrgico) vs amplo", d:"Quem decide: os dois, pelo comportamento das 5 primeiras calls.", st:"pendente", cmts:[
-      {a:"Renato", m:"Proposta: nascemos ESTREITOS. Dados: cirúrgicos são 29/60 da pesquisa, 79% de intenção (vs 48%) e concentram o topo da disposição a pagar. Nas calls com não-cirúrgicos, testamos a versão ampla como plano B.", dt:"15/09 09:05"}]},
-    {t:"Preço da fundadora: validar degrau R$ 3.497", d:"Quem decide: as calls. ≥40% fecham → confirma. <25% → degrau 2.", st:"pendente", cmts:[
-      {a:"Renato", m:"Operação: as 6 primeiras calls com leads de score máximo (cirúrgico + faixa R$ 3k+ + \"sem mentor e sinto falta\"). Preço cheio R$ 5.997 sempre citado antes da condição. Registro por call: lead / degrau / resultado / objeção. Decidimos após a 6ª.", dt:"15/09 09:10"}]},
-    {t:"Cronograma da turma fundadora", d:"Quem decide: os dois. As datas propostas já estão aplicadas em todo o material.", st:"pendente", cmts:[
-      {a:"Renato", m:"Calendário aplicado no material:\n· 21/09 — abrem aplicações (WhatsApp nos 35 leads)\n· 21/09 a 09/10 — calls\n· 10/10 — fechamento (mín. 8)\n· 19/10 — encontro 1 · quinzenais às segundas 20h\n· Presencial: sáb 21/11, 14h · Encerramento: sáb 12/12, 10h\nSe mudar algo, eu regenero as peças.", dt:"15/09 09:15"}]},
-    {t:"Encontro presencial no CCD: data e formato", d:"Quem decide: Daniel (agenda + normas da clínica).", st:"pendente", cmts:[
-      {a:"Renato", m:"Proposta: sáb 21/11, 14h–18h. Tour + 1 discussão de caso na sala de reunião + café com a equipe. SEM ambiente assistencial com paciente. Confirmar normas do prédio pra visitantes.", dt:"15/09 09:20"}]},
-    {t:"Contador convidado do módulo de finanças", d:"Quem decide: os dois. Trava a pauta do Encontro 4.", st:"pendente", cmts:[
-      {a:"Renato", m:"Critério: especialista em PJ médica que tope gravar sem cobrar (moeda: exposição + menção nos bônus). Daniel: teu contador atual serve? Senão trago 2 opções até 25/09.", dt:"15/09 09:25"}]}
+    {t:"Nome da mentoria", d:"DECIDIDO: Mentoria Revolução Sináptica (nome proposto pelo Daniel no doc do programa). 'Rota Cirúrgica' vira o nome do entregável — o plano de 5 anos de cada aluno.", st:"decidido", cmts:[
+      {a:"Renato", m:"Fechado: o nome é teu, Daniel — Mentoria Revolução Sináptica. E o 'Rota Cirúrgica' não morreu: virou o nome do plano que cada aluno constrói e você assina. Nome da mentoria é marca; Rota é o entregável. Todo o material já está atualizado assim.", dt:"20/10 20:00"}]},
+    {t:"Posicionamento: estreito (cirúrgico) vs amplo", d:"Quem decide: Daniel, com recomendação do Renato. A grade do doc serve pros dois; a promessa precisa escolher.", st:"pendente", cmts:[
+      {a:"Renato", m:"Recomendação enviada em 20/10: nascer ESTREITO. Dados da pesquisa: quem mira cirurgia tem 79% de intenção (vs 48% do resto) e concentra o topo da disposição a pagar. Clínico que quiser entrar, entra — mas a mira da comunicação é o cirúrgico. Aguardando teu ok.", dt:"20/10 20:00"}]},
+    {t:"Cronograma da turma fundadora", d:"Quem decide: os dois, de viva voz. As datas de set/out caducaram — todo o material está sem datas até o novo calendário fechar.", st:"pendente", cmts:[
+      {a:"Renato", m:"Proposta na mesa pra discutirmos: reaquecimento dos 35 leads ainda em outubro, calls em novembro, turma fechada até o início de dezembro, encontro de abertura antes do Natal e programa rodando janeiro–março (estudante de férias em janeiro = presença máxima ao vivo). Presencial no CCD em fevereiro. Fechando as datas, eu re-dato todas as peças de uma vez.", dt:"20/10 20:00"}]},
+    {t:"Preço da fundadora: validar degrau R$ 3.497", d:"Quem decide: as calls. ≥40% fecham → confirma. <25% → degrau 2 (R$ 2.497). Preço cheio R$ 5.997 sempre citado antes da condição.", st:"pendente", cmts:[
+      {a:"Renato", m:"Operação: as 6 primeiras calls com leads de score máximo (cirúrgico + faixa R$ 3k+ declarada + 'sem mentor e sinto falta'). Registro por call: lead / degrau / resultado / objeção. Decidimos após a 6ª.", dt:"20/10 20:00"}]},
+    {t:"Contador convidado (módulo de finanças)", d:"Formato DECIDIDO: encontro em dupla — contador traz a técnica, Daniel traz a vivência. Falta confirmar QUEM.", st:"pendente", cmts:[
+      {a:"Renato", m:"Daniel confirmou que vai ter contador convidado em dupla com ele. Pendente: nome. Critério: especialista em PJ médica/prática médica, que tope gravar e participar do ao vivo (moeda: exposição pra futura clientela médica + menção nos bônus).", dt:"20/10 20:00"}]},
+    {t:"Convidado jurídico (bônus Seguros e processos)", d:"Novo bônus gravado confirmado pelo Daniel. Falta definir o convidado: advogado(a) de direito médico.", st:"pendente", cmts:[
+      {a:"Renato", m:"Bônus 'Seguros e processos' entrou na esteira: responsabilidade civil, seguro, prontuário como proteção, o que fazer ao ser citado. Perfil do convidado: direito médico, didático, topa gravar em troca de exposição. Roteiro v1 já está na pauta de gravação dos bônus.", dt:"20/10 20:00"}]},
+    {t:"Encontro presencial no CCD: data e formato", d:"Quem decide: Daniel (agenda + normas da clínica). Formato proposto: tour + discussão de caso + 'A conversa' completa em formato fogueira + café com a equipe. SEM ambiente assistencial com paciente.", st:"pendente", cmts:[
+      {a:"Renato", m:"O presencial ganhou papel novo: é onde 'A conversa que ninguém tem com você' roda na versão completa, formato fogueira. Data entra junto com o cronograma. Confirmar normas do prédio pra visitantes.", dt:"20/10 20:00"}]}
   ],
   assets:[
     {t:"Script final da call de vendas", dono:"Renato", done:false, c:A_SCRIPT},
+    {t:"Sequência de WhatsApp — reaquecimento dos 35 leads", dono:"Renato", done:false, c:A_WHATS},
     {t:"Página de aplicação — regras e formulário", dono:"Renato", done:false, c:A_PAGINA},
     {t:"Página dos Pais — regras da peça", dono:"Renato", done:false, c:A_PAIS_TXT},
-    {t:"Sequência de WhatsApp para os 35 leads", dono:"Renato", done:false, c:A_WHATS},
-    {t:"Downsell gravado — oferta e script", dono:"Renato", done:false, c:A_DOWNSELL},
-    {t:"Pauta de gravação dos bônus (2 roteiros)", dono:"Daniel", done:false, c:A_BONUS},
+    {t:"Trilha Gravada (downsell) — oferta e script", dono:"Renato", done:false, c:A_DOWNSELL},
+    {t:"Pauta de gravação dos bônus (3 roteiros)", dono:"Daniel", done:false, c:A_BONUS},
     {t:"Anúncio público de abertura (post + stories)", dono:"Renato", done:false, c:A_ANUNCIO}
   ]
 };
@@ -852,6 +879,7 @@ async function load(){
   try{
     const v = await storeGet();
     state = v ? JSON.parse(v) : JSON.parse(JSON.stringify(seed));
+    if(!state.ver || state.ver !== "v5"){ state = JSON.parse(JSON.stringify(seed)); save(); }
     if(!state.decks) state.decks = JSON.parse(JSON.stringify(seedDecks));
     ind("em dia");
   }catch(e){
@@ -901,7 +929,7 @@ function md(src){
 }
 const ST_NEXT = {rascunho:"revisao", revisao:"aprovado", aprovado:"rascunho"};
 const ST_LABEL = {rascunho:"Rascunho", revisao:"Em revisão", aprovado:"Aprovado"};
-const ENC_LABEL = {}; ENCONTROS.forEach(e=>{ if(!e.pres) ENC_LABEL[e.id]="Encontro "+e.id.slice(1)+" · "+e.d; });
+const ENC_LABEL = {}; ENCONTROS.forEach(e=>{ if(!e.pres) ENC_LABEL[e.id]="Encontro "+e.id.slice(1); });
 
 /* ================= grade ================= */
 function renderMods(){
@@ -1104,21 +1132,21 @@ function renderSlide(){
       <div class="sl-k">${esc(s.k)}</div>
       <div class="sl-cover-t">${esc(s.t)}</div>
       ${s.lines.map((l,ix)=> ix===0?`<div class="sl-cover-box">${esc(l)}</div>`:`<div class="sl-cover-sub">${esc(l)}</div>`).join("")}
-      <div class="sl-foot">Mentoria Rota Cirúrgica · turma fundadora</div></div>`;
+      <div class="sl-foot">Mentoria Revolução Sináptica · turma fundadora</div></div>`;
   } else if(s.type==="agenda"){
     inner=`<div class="sl-pad">
       <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
       <div class="sl-agenda">${s.lines.map(l=>{
         const p=l.split("|"); const h=p.length>1?p[0].trim():""; const tx=(p.length>1?p.slice(1).join("|"):l).trim();
         return `<div class="ag">${h?`<b>${esc(h)}</b>`:""}<span>${esc(tx)}</span></div>`;}).join("")}</div>
-      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+      <div class="sl-foot">Mentoria Revolução Sináptica</div></div>`;
   } else if(s.type==="mission"){
     inner=`<div class="sl-pad">
       <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
       ${s.q?`<div class="sl-quote">“${esc(s.q)}”</div>`:""}
       <ul class="sl-b">${s.lines.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>
       ${s.next?`<div class="sl-next"><b>Próximo:</b> <span>${esc(s.next)}</span></div>`:""}
-      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+      <div class="sl-foot">Mentoria Revolução Sináptica</div></div>`;
   }  else if(s.type==="cover2"){
     el.className="slide dark";
     inner=`<div class="sl-pad">
@@ -1137,7 +1165,7 @@ function renderSlide(){
         <span class="sv-arr" style="left:66.1%;top:44%">↘</span>
       </div>
       <div class="sv-note"><b>${esc((s.note||"").split("—")[0])}${(s.note||"").includes("—")?"—":""}</b>${esc((s.note||"").split("—").slice(1).join("—"))}</div>
-      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+      <div class="sl-foot">Mentoria Revolução Sináptica</div></div>`;
   } else if(s.type==="quote"){
     el.className="slide dark";
     inner=`<div class="sl-pad">
@@ -1146,7 +1174,7 @@ function renderSlide(){
       <div class="sv-bigq">${esc(s.q)}</div>
       <div class="sv-qa">${esc(s.a||"")}</div>
       ${s.note?`<div class="sv-note">${esc(s.note)}</div>`:""}
-      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+      <div class="sl-foot">Mentoria Revolução Sináptica</div></div>`;
   } else if(s.type==="duo"){
     const card=(c,cls,icoCol,chkCol,txtCol)=>`<div class="sv-card ${cls}">
       <div class="sv-ch"><span class="sv-ico">${svgi(c.ic||"map",icoCol)}</span><div><b>${esc(c.label)}</b><span>${esc(c.title||"")}</span></div></div>
@@ -1158,7 +1186,7 @@ function renderSlide(){
         ${card(s.c2||{},"c2","#17A08A","#0E2A45","#FFFFFF")}
       </div>
       ${s.note?`<div class="sv-note" style="background:transparent;padding-left:0"><b>${esc(s.note)}</b></div>`:""}
-      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+      <div class="sl-foot">Mentoria Revolução Sináptica</div></div>`;
   } else if(s.type==="timeline"){
     const CMAP={navy:"#0E2A45",orange:"#F0973B",teal:"#17A08A"};
     const n=(s.nodes||[]).length;
@@ -1169,7 +1197,7 @@ function renderSlide(){
       </div>
       <div class="sv-feats">${(s.feats||[]).map(f=>`<div class="sv-feat"><span class="sv-ico">${svgi(f[0],"#17A08A")}</span><div><b>${esc(f[1])}</b><span>${esc(f[2])}</span></div></div>`).join("")}</div>
       ${s.note?`<div class="sv-line" style="color:#8A97A5;font-style:italic">${esc(s.note)}</div>`:""}
-      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+      <div class="sl-foot">Mentoria Revolução Sináptica</div></div>`;
   } else if(s.type==="panels"){
     const panel=(p_,cls,start)=>`<div class="sv-panel ${cls}"><div class="lb">${esc(p_.label)}</div>
       ${(p_.items||[]).map((it,i)=>`<div class="sv-pi"><i>${start+i}</i><span>${esc(it)}</span></div>`).join("")}</div>`;
@@ -1177,14 +1205,14 @@ function renderSlide(){
       <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
       <div class="sv-panels">${panel(s.p1||{},"p1",1)}${panel(s.p2||{},"p2",(s.p1&&s.p1.items?s.p1.items.length:4)+1)}</div>
       ${s.note?`<div class="sv-bonus"><b>${esc(s.note.split(":")[0])}:</b>${esc(s.note.split(":").slice(1).join(":"))}</div>`:""}
-      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+      <div class="sl-foot">Mentoria Revolução Sináptica</div></div>`;
   } else if(s.type==="mentors"){
     const mt=(m,col)=>`<div class="sv-mt"><div class="hd"><span class="sv-av" style="background:${col}">${esc(m.ini)}</span><div><b>${esc(m.nome)}</b><em>${esc(m.papel)}</em></div></div>
       ${(m.creds||[]).map(c=>`<div class="sv-cred">${svgi("award","#17A08A")}<span>${esc(c)}</span></div>`).join("")}</div>`;
     inner=`<div class="sl-pad">
       <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
       <div class="sv-mentors">${mt(s.m1||{},"#0E2A45")}${mt(s.m2||{},"#17A08A")}</div>
-      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+      <div class="sl-foot">Mentoria Revolução Sináptica</div></div>`;
   } else if(s.type==="closing"){
     el.className="slide dark";
     inner=`<div class="sl-pad">
@@ -1192,13 +1220,13 @@ function renderSlide(){
       <div class="sv-stats">${(s.stats||[]).map(st=>`<div class="sv-stat"><b>${esc(st[0])}</b><span>${esc(st[1])}</span></div>`).join("")}</div>
       <div class="sv-guar">${svgi("shield","#0E2A45")}<div><b>${esc((s.guarantee||"").split(":")[0])}:</b> ${esc((s.guarantee||"").split(":").slice(1).join(":"))}</div></div>
       ${(s.lines||[]).map(l=>`<div class="sv-line">${l.includes(":")?`<b>${esc(l.split(":")[0])}:</b>${esc(l.split(":").slice(1).join(":"))}`:esc(l)}</div>`).join("")}
-      <div class="sl-foot">Mentoria Rota Cirúrgica · Dr. Daniel Kirchhoff — CRM 109457 · RQE 65606</div></div>`;
+      <div class="sl-foot">Mentoria Revolução Sináptica · Dr. Daniel Kirchhoff — CRM 109457 · RQE 65606</div></div>`;
   } else {
     inner=`<div class="sl-pad">
       <div class="sl-k">${esc(s.k)}</div><div class="sl-t">${esc(s.t)}</div>
       ${s.q?`<div class="sl-quote">“${esc(s.q)}”</div>`:""}
       <ul class="sl-b">${s.lines.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>
-      <div class="sl-foot">Mentoria Rota Cirúrgica</div></div>`;
+      <div class="sl-foot">Mentoria Revolução Sináptica</div></div>`;
   }
   el.innerHTML=inner;
 }
@@ -1271,9 +1299,9 @@ function openLanding(){
     <header><div class="wrap">
       <span class="lk">Turma fundadora · 10 vagas · encontros ao vivo</span>
       <h1>A mentoria para quem quer carreira cirúrgica</h1>
-      <p class="sub">8 semanas com um neurocirurgião preceptor da SBN pra você sair com o seu plano de carreira de 5 anos — antes que a formatura decida por você.</p>
+      <p class="sub">8 semanas com um neurocirurgião preceptor da SBN pra você sair com a sua Rota Cirúrgica — o plano de carreira de 5 anos revisado por ele — antes que a formatura decida por você.</p>
       <a class="lbtn" href="#" onclick="document.getElementById('lp-aplicar').scrollIntoView({behavior:'smooth'});return false;">Aplicar para a turma fundadora</a>
-      <div class="heroband"><span>Grupo de no máx. 10</span><span>Ao vivo com o mentor</span><span>Início 19/10</span></div>
+      <div class="heroband"><span>Grupo de no máx. 10</span><span>Ao vivo com o mentor</span><span>Sua Rota revisada 1:1</span></div>
     </div></header>
     <section><div class="wrap">
       <span class="lk">O problema que ninguém te conta</span>
@@ -1287,25 +1315,25 @@ function openLanding(){
       <p class="bigline">As decisões que evitam esse destino são tomadas <b>antes da formatura</b>. É nessa janela que a mentoria atua.</p>
     </div></section>
     <section class="alt"><div class="wrap">
-      <span class="lk">O que você leva</span><h2>Um mapa e uma sala</h2>
+      <span class="lk">O que você leva</span><h2>Uma rota e uma sala</h2>
       <div class="mech2">
-        <div class="mcard m1"><span class="lk">Mecanismo 1</span><h3>O Mapa</h3><p>Seu plano de carreira de 5 anos — especialidade-alvo, rota de residência, marcos por ano, plano B e finanças. Revisado pelo Dr. Daniel em sessão individual.</p></div>
+        <div class="mcard m1"><span class="lk">Mecanismo 1</span><h3>Sua Rota Cirúrgica</h3><p>O plano de carreira de 5 anos com o seu nome — especialidade-alvo, rota de residência, marcos por ano, plano B e finanças. Revisada e assinada pelo Dr. Daniel em sessão individual.</p></div>
         <div class="mcard m2"><span class="lk">Mecanismo 2</span><h3>A Sala</h3><p>Grupo de 10, comunidade com o mentor presente e a rede por trás de um preceptor da SBN. Carreira cirúrgica se constrói por quem te conhece antes da prova.</p></div>
       </div>
     </div></section>
     <section><div class="wrap">
       <span class="lk">A grade</span><h2>Metade medicina real. Metade o que ninguém ensina.</h2>
       <div class="gradegrid">
-        <div class="gitem"><i>1</i>Raciocínio clínico na prática — casos reais</div>
-        <div class="gitem"><i>2</i>Bastidor cirúrgico quinzenal</div>
-        <div class="gitem"><i>3</i>Residência I — o jogo por trás da prova</div>
-        <div class="gitem"><i>4</i>Residência II — hot seats de currículo</div>
+        <div class="gitem"><i>1</i>Raciocínio clínico — o detetive objetivo</div>
+        <div class="gitem"><i>2</i>Desvendando o centro cirúrgico</div>
+        <div class="gitem"><i>3</i>Residência — o jogo por trás da prova</div>
+        <div class="gitem"><i>4</i>Hot seats de currículo e network</div>
         <div class="gitem b2"><i>5</i>Carreira nos primeiros 5 anos</div>
-        <div class="gitem b2"><i>6</i>Finanças do médico — com convidado</div>
-        <div class="gitem b2"><i>7</i>Marca pessoal dentro do CFM</div>
-        <div class="gitem b2"><i>8</i>Seu plano de 5 anos, revisado</div>
+        <div class="gitem b2"><i>6</i>Finanças médicas — dupla com contador</div>
+        <div class="gitem b2"><i>7</i>Método Abdo — marketing no CFM</div>
+        <div class="gitem b2"><i>8</i>Sua Rota Cirúrgica, revisada e assinada</div>
       </div>
-      <p style="margin-top:12px;font-size:14px;color:var(--sub)">+ Bônus gravados: <b>A consulta que fideliza</b> · <b>Do CRM ao primeiro consultório</b></p>
+      <p style="margin-top:12px;font-size:14px;color:var(--sub)">+ Bônus gravados: <b>A consulta que fideliza</b> · <b>Do CRM ao primeiro consultório</b> · <b>Seguros e processos</b></p>
     </div></section>
     <section class="alt"><div class="wrap">
       <span class="lk">Como funciona</span><h2>8 semanas, lado a lado</h2>
@@ -1315,7 +1343,7 @@ function openLanding(){
         <div class="hl"><b>Sessão individual</b><span>30 min a sós pro seu plano</span></div>
         <div class="hl"><b>Tarde no CCD</b><span>presencial opcional em São Paulo</span></div>
         <div class="hl"><b>10 vagas</b><span>grupo pequeno de verdade</span></div>
-        <div class="hl"><b>Início 19/10</b><span>encerramento 12/12 · seg 20h</span></div>
+        <div class="hl"><b>Quinzenal ao vivo</b><span>datas confirmadas na aprovação da aplicação</span></div>
       </div>
       <div class="guarantee"><b>Garantia de primeira quinzena:</b> participe dos 2 primeiros encontros. Se não for pra você, devolvemos 100% — sem perguntas.</div>
     </div></section>
@@ -1341,7 +1369,7 @@ function openLanding(){
       </div>
       <div id="lp-obrigado"><h3>✓ Aplicação recebida</h3><p>Te chamamos no WhatsApp em até 48h pra agendar os 30 minutos.<br>— Dr. Daniel Kirchhoff &amp; Renato Abdo</p></div>
     </div></section>
-    <footer><div class="wrap">Mentoria Rota Cirúrgica — programa educacional de carreira. Não constitui consulta, atendimento médico, nem garantia de aprovação ou resultado.<br>Resp. técnico do conteúdo médico: Dr. Daniel Kirchhoff — CRM 109457 · RQE 65606 · São Paulo/SP.</div></footer>
+    <footer><div class="wrap">Mentoria Revolução Sináptica — programa educacional de carreira. Não constitui consulta, atendimento médico, nem garantia de aprovação ou resultado.<br>Resp. técnico do conteúdo médico: Dr. Daniel Kirchhoff — CRM 109457 · RQE 65606 · São Paulo/SP.</div></footer>
   </div>`);
 }
 
@@ -1350,14 +1378,14 @@ function openPais(){
   <div style="background:#EDF1F5;min-height:100%;padding:1px">
     <div class="pais-wrap">
       <div class="pais-h">
-        <span class="lk">MENTORIA ROTA CIRÚRGICA · TURMA FUNDADORA</span>
+        <span class="lk">MENTORIA REVOLUÇÃO SINÁPTICA · TURMA FUNDADORA</span>
         <h2>Sobre a mentoria — resumo para a família</h2>
         <p>Dr. Daniel Kirchhoff (neurocirurgião · preceptor SBN) e Renato Abdo (estrategista de carreira e negócios)</p>
       </div>
       <div class="pais-b">
-        <p>Seu filho ou sua filha aplicou para a turma fundadora da <b>Mentoria Rota Cirúrgica</b>, conduzida pelo Dr. Daniel Kirchhoff — neurocirurgião, preceptor da Sociedade Brasileira de Neurocirurgia e fundador do Centro de Combate à Dor (São Paulo) — com participação de Renato Abdo, estrategista de carreira e negócios. Este resumo existe para a decisão ser tomada em família, com clareza.</p>
+        <p>Seu filho ou sua filha aplicou para a turma fundadora da <b>Mentoria Revolução Sináptica</b>, conduzida pelo Dr. Daniel Kirchhoff — neurocirurgião, preceptor da Sociedade Brasileira de Neurocirurgia e fundador do Centro de Combate à Dor (São Paulo) — com participação de Renato Abdo, estrategista de carreira e negócios. Este resumo existe para a decisão ser tomada em família, com clareza.</p>
         <h4>O QUE É</h4>
-        <p>Um programa educacional de 8 semanas, em grupo de no máximo 10 alunos: 5 encontros quinzenais ao vivo com o mentor, comunidade de acompanhamento, uma sessão individual e um encontro presencial opcional na clínica, em São Paulo. O objetivo é um só — terminar com um <b>plano de carreira de 5 anos</b>, escrito pelo aluno e revisado por um especialista que forma médicos residentes há anos.</p>
+        <p>Um programa educacional de 8 semanas, em grupo de no máximo 10 alunos: 5 encontros quinzenais ao vivo com o mentor, comunidade de acompanhamento, uma sessão individual e um encontro presencial opcional na clínica, em São Paulo. O objetivo é um só — o(a) aluno(a) terminar com a própria <b>Rota Cirúrgica</b>: um plano de carreira de 5 anos, escrito por ele(a) e revisado por um especialista que forma médicos residentes há anos.</p>
         <h4>POR QUE ISSO IMPORTA AGORA</h4>
         <p>A faculdade forma bem em medicina, mas não orienta carreira. Sem plano, o caminho mais comum do recém-formado é depender de plantões por anos. As decisões que evitam isso — especialidade, residência, posicionamento, finanças — são tomadas <b>antes da formatura</b>.</p>
         <h4>O QUE NÃO É</h4>
